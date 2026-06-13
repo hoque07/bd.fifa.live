@@ -1,0 +1,2799 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <base href="../../" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FIFA World Cup 2026 BD Countdown</title>
+  <style>
+    :root {
+      --blue: #0b63ce;
+      --blue-2: #0f87ff;
+      --deep: #073b86;
+      --ink: #13233a;
+      --muted: #64748b;
+      --soft: #eef7ff;
+      --line: #d8eaff;
+      --panel: rgba(255, 255, 255, 0.86);
+      --white: #ffffff;
+      --green: #087f5b;
+      --orange: #d97706;
+      --red: #c2410c;
+      --shadow: 0 20px 55px rgba(8, 79, 160, 0.13);
+      --glass: rgba(255, 255, 255, 0.72);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans Bengali", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 14% 4%, rgba(23, 132, 255, 0.18), transparent 32%),
+        radial-gradient(circle at 88% 12%, rgba(7, 59, 134, 0.12), transparent 30%),
+        linear-gradient(180deg, #f6fbff 0%, #ffffff 42%, #eef7ff 100%);
+      min-height: 100vh;
+    }
+
+    body.dark {
+      --blue: #10e6f2;
+      --blue-2: #1fffd2;
+      --deep: #f4fbff;
+      --ink: #f7fbff;
+      --muted: #8d9aaa;
+      --soft: #10151f;
+      --line: rgba(27, 246, 245, 0.16);
+      --panel: rgba(14, 18, 29, 0.82);
+      --white: #080b11;
+      --green: #1fffd2;
+      --orange: #ffb86c;
+      --red: #ff6b6b;
+      --glass: rgba(10, 14, 23, 0.72);
+      --shadow: 0 28px 90px rgba(0, 0, 0, 0.62);
+      background:
+        radial-gradient(circle at 10% 14%, rgba(0, 255, 224, 0.16), transparent 28%),
+        radial-gradient(circle at 96% 28%, rgba(0, 218, 255, 0.20), transparent 25%),
+        radial-gradient(circle at 50% 0%, rgba(12, 107, 104, 0.28), transparent 36%),
+        linear-gradient(180deg, #030706 0%, #05080d 48%, #05070b 100%);
+    }
+
+    body.dark::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background:
+        linear-gradient(90deg, rgba(15,255,226,0.11), transparent 18%, transparent 82%, rgba(15,255,226,0.12)),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.018) 0, rgba(255,255,255,0.018) 1px, transparent 1px, transparent 5px);
+      opacity: 0.95;
+    }
+
+    body:not(.logged-in) header,
+    body:not(.logged-in) .control-dock,
+    body:not(.logged-in) .timer-card,
+    body:not(.logged-in) .top-nav,
+    body:not(.logged-in) main,
+    body:not(.logged-in) footer,
+    body:not(.logged-in) .back-top {
+      display: none;
+    }
+
+    button, input { font: inherit; }
+    button { -webkit-tap-highlight-color: transparent; }
+
+    header {
+      position: relative;
+      overflow: hidden;
+      color: white;
+      padding: 104px 16px 42px;
+      text-align: center;
+      background: linear-gradient(135deg, #0b63ce, #063f91 64%, #092b63);
+      border-bottom-left-radius: 32px;
+      border-bottom-right-radius: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    body.dark header {
+      background:
+        radial-gradient(circle at 50% 85%, rgba(16, 230, 242, 0.16), transparent 34%),
+        radial-gradient(circle at 12% 0%, rgba(31, 255, 210, 0.10), transparent 31%),
+        linear-gradient(180deg, rgba(7, 13, 18, 0.96), rgba(4, 7, 12, 0.96));
+      border-bottom: 1px solid rgba(16, 230, 242, 0.15);
+      box-shadow: 0 0 90px rgba(16, 230, 242, 0.10);
+    }
+
+    body.dark header::after {
+      background: rgba(16, 230, 242, 0.16);
+      filter: blur(34px);
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      inset: auto -10% -36% -10%;
+      height: 150px;
+      background: rgba(255,255,255,0.14);
+      filter: blur(22px);
+      transform: rotate(-2deg);
+    }
+
+    .hero-inner { position: relative; z-index: 1; width: min(1080px, 100%); margin: 0 auto; }
+    h1 { margin: 0 0 10px; font-size: clamp(29px, 7vw, 52px); line-height: 1.05; letter-spacing: 0; }
+    .hero-copy { margin: 0 auto; max-width: 760px; color: rgba(255,255,255,0.9); font-size: 15px; line-height: 1.7; }
+
+    .bd-clock {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+      padding: 12px 16px;
+      border: 1px solid rgba(255,255,255,0.28);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.16);
+      font-weight: 900;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .container { width: min(1120px, calc(100% - 20px)); margin: 0 auto; }
+
+    .timer-card {
+      position: relative;
+      top: auto;
+      z-index: 30;
+      width: min(1120px, calc(100% - 20px));
+      margin: -22px auto 18px;
+      padding: 16px;
+      border: 1px solid rgba(216, 234, 255, 0.9);
+      border-radius: 24px;
+      background: var(--glass);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px) saturate(140%);
+      -webkit-backdrop-filter: blur(20px) saturate(140%);
+    }
+
+    body.dark .timer-card,
+    body.dark .top-nav,
+    body.dark .panel,
+    body.dark .login-card,
+    body.dark .modal-card {
+      border-color: rgba(16, 230, 242, 0.14);
+      background:
+        linear-gradient(180deg, rgba(18, 23, 35, 0.88), rgba(8, 11, 18, 0.90));
+      box-shadow:
+        0 20px 70px rgba(0, 0, 0, 0.56),
+        0 0 0 1px rgba(255,255,255,0.025) inset,
+        0 0 38px rgba(16, 230, 242, 0.055);
+    }
+
+    body.dark .timer-card {
+      box-shadow:
+        0 22px 78px rgba(0, 0, 0, 0.64),
+        0 0 52px rgba(16, 230, 242, 0.12);
+    }
+
+    .top-nav {
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      z-index: 100;
+      width: min(1120px, calc(100% - 20px));
+      margin: 0;
+      padding: 7px;
+      border: 1px solid rgba(99,199,255,0.42);
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(4,53,116,0.9), rgba(8,103,198,0.78));
+      box-shadow: 0 14px 38px rgba(0,45,110,0.3), inset 0 1px 0 rgba(255,255,255,0.16);
+      backdrop-filter: blur(20px) saturate(150%);
+      -webkit-backdrop-filter: blur(20px) saturate(150%);
+      transform: translateX(-50%);
+    }
+
+    .top-nav-row {
+      display: flex;
+      gap: 5px;
+      overflow: hidden;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .nav-account { display: flex; align-items: center; gap: 5px; margin-left: 3px; padding-left: 7px; border-left: 1px solid rgba(255,255,255,0.25); }
+    .top-nav .user-pill { min-height: 30px; padding: 5px 8px; color: white; border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.12); font-size: 10px; }
+    .top-nav #logoutBtn { min-height: 30px; padding: 5px 8px; border-color: rgba(255,255,255,0.36); background: rgba(0,40,96,0.44); font-size: 10px; }
+
+    body.dark .top-nav {
+      border-color: rgba(16,230,242,0.3);
+      background: linear-gradient(135deg, rgba(4,23,47,0.94), rgba(5,68,115,0.9));
+      box-shadow: 0 14px 42px rgba(0,0,0,0.46), 0 0 24px rgba(16,230,242,0.08);
+    }
+
+    .top-nav .chip-btn {
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
+
+    .timer-head, .toolbar-head, .section-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .live-dot {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--deep);
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .live-dot::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse 1.25s infinite;
+    }
+
+    .control-dock {
+      position: relative;
+      overflow: hidden;
+      width: min(1120px, calc(100% - 20px));
+      margin: -18px auto 14px;
+      padding: 13px;
+      border-radius: 20px;
+      z-index: 32;
+      animation: liquidEnter 0.62s cubic-bezier(.2,.8,.2,1) both;
+    }
+
+    .control-dock::before,
+    .timer-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-radius: inherit;
+      background: linear-gradient(115deg, transparent 20%, rgba(255,255,255,0.28) 45%, transparent 68%);
+      transform: translateX(-120%);
+      animation: liquidSheen 8s ease-in-out infinite;
+    }
+
+    body.dark .control-dock::before,
+    body.dark .timer-card::before { opacity: 0.14; }
+
+    @keyframes liquidEnter {
+      from { opacity: 0; transform: translateY(18px) scale(0.985); filter: blur(8px); }
+      to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    }
+
+    @keyframes liquidSheen {
+      0%, 72% { transform: translateX(-120%); }
+      88%, 100% { transform: translateX(120%); }
+    }
+
+    .live-dot.is-live::before {
+      background: #ff4d67;
+      animation-duration: 0.85s;
+    }
+
+    .live-dot.is-complete::before {
+      background: var(--muted);
+      animation: none;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(8,127,91,0.48); }
+      70% { box-shadow: 0 0 0 10px rgba(8,127,91,0); }
+      100% { box-shadow: 0 0 0 0 rgba(8,127,91,0); }
+    }
+
+    .timer-sub { color: var(--muted); font-size: 13px; font-weight: 750; line-height: 1.45; text-align: right; }
+    .first-match { margin: 12px 0; color: var(--deep); font-size: clamp(18px, 4vw, 25px); font-weight: 950; line-height: 1.35; }
+
+    .timer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 9px;
+    }
+
+    .timer-box {
+      min-width: 0;
+      text-align: center;
+      padding: 13px 7px;
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.82), var(--soft));
+    }
+
+    .timer-box strong {
+      display: block;
+      color: var(--deep);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: clamp(29px, 8vw, 48px);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    body.dark .timer-box strong,
+    body.dark .stat-card strong,
+    body.dark .next-count {
+      color: var(--blue);
+      text-shadow: 0 0 18px rgba(16, 230, 242, 0.24);
+    }
+
+    .timer-box span { display: block; margin-top: 6px; color: var(--muted); font-size: 12px; font-weight: 850; }
+    .timer-status { margin-top: 10px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+
+    .live-score-panel {
+      display: none;
+      margin-top: 12px;
+      padding: 16px;
+      border: 1px solid rgba(21,157,255,0.34);
+      border-radius: 16px;
+      color: var(--deep);
+      background: linear-gradient(145deg, #ffffff, #eaf4ff);
+      box-shadow: 0 12px 30px rgba(8,79,160,0.12);
+    }
+
+    .live-score-panel.show { display: block; }
+    body.dark .live-score-panel { background: linear-gradient(145deg, #101a2a, #0a3158); }
+    .live-score-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 9px; }
+    .live-competition { color: var(--deep); font-size: 13px; font-weight: 850; }
+    .google-live-link { color: #075bc7; font-size: 12px; font-weight: 900; text-decoration: none; }
+    .google-live-link:hover { color: #003f91; text-decoration: underline; }
+    .live-score-meta { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; color: var(--muted); font-size: 12px; font-weight: 850; }
+    .live-feed-status { display: block; margin: -3px 0 12px; color: #075bc7; font-size: 11px; font-weight: 850; text-align: center; }
+    body.dark .live-feed-status { color: #73d8ff; }
+    .live-score-board { display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr); gap: 12px; align-items: center; }
+    .score-team { min-width: 0; text-align: center; color: var(--deep); font-size: 15px; font-weight: 950; line-height: 1.35; }
+    .score-flag { display: block; margin-bottom: 5px; font-size: 38px; line-height: 1; }
+    .score-center { display: flex; align-items: center; gap: 8px; }
+    .score-value { min-width: 42px; color: #075bc7; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 42px; font-weight: 850; text-align: center; font-variant-numeric: tabular-nums; }
+    .score-divider { color: var(--muted); font-size: 23px; font-weight: 950; }
+    body.dark .score-value, body.dark .score-team, body.dark .live-competition { color: #eafbff; }
+    body.dark .google-live-link { color: #73d8ff; }
+    .live-score-links { display: flex; justify-content: flex-end; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .live-next-match { margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(8,79,160,0.18); text-align: center; }
+    .live-next-match strong { display: block; color: var(--deep); font-size: 13px; }
+    .live-next-match span { display: block; margin-top: 4px; color: #075bc7; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 17px; font-weight: 950; }
+    body.dark .live-next-match strong { color: #eafbff; }
+    body.dark .live-next-match span { color: #73d8ff; }
+
+    .next-four-wrap {
+      margin-top: 13px;
+      padding-top: 13px;
+      border-top: 1px solid var(--line);
+    }
+
+    .next-four-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 9px;
+    }
+
+    .next-four-head strong { color: var(--deep); }
+
+    .next-four-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .next-four-item {
+      min-width: 0;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--soft);
+    }
+
+    .next-four-item strong,
+    .next-four-item span {
+      display: block;
+      overflow-wrap: anywhere;
+    }
+
+    .next-four-item strong { color: var(--deep); font-size: 12px; line-height: 1.4; }
+    .next-four-item span { margin-top: 4px; color: var(--muted); font-size: 11px; font-weight: 750; line-height: 1.45; }
+
+    body.dark .next-four-item {
+      background: linear-gradient(180deg, rgba(18,22,32,0.88), rgba(7,10,16,0.92));
+      border-color: rgba(16,230,242,0.14);
+    }
+
+    .pdf-link {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .panel {
+      margin-bottom: 16px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: var(--panel);
+      box-shadow: 0 14px 38px rgba(8, 79, 160, 0.08);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      animation: liquidEnter 0.55s cubic-bezier(.2,.8,.2,1) both;
+      transition: transform 0.28s cubic-bezier(.2,.8,.2,1), box-shadow 0.28s ease, border-color 0.28s ease;
+    }
+
+    .panel:hover { transform: translateY(-2px); }
+
+    .live-watch-panel {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border-color: rgba(16, 230, 242, 0.35);
+      background: linear-gradient(110deg, rgba(16, 230, 242, 0.1), rgba(255,255,255,0.82) 48%, rgba(31,255,210,0.08));
+    }
+
+    body.dark .live-watch-panel {
+      background: linear-gradient(110deg, rgba(16, 230, 242, 0.12), rgba(8, 12, 20, 0.94) 48%, rgba(31,255,210,0.08));
+      box-shadow: 0 18px 55px rgba(0,0,0,0.38), 0 0 28px rgba(16,230,242,0.08);
+    }
+
+    .live-watch-copy { min-width: 0; }
+    .live-watch-copy h2 { margin: 0 0 5px; }
+
+    .live-watch-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      min-height: 46px;
+      padding: 11px 18px;
+      border: 1px solid var(--blue);
+      border-radius: 999px;
+      color: white;
+      background: linear-gradient(135deg, var(--blue), var(--blue-2));
+      box-shadow: 0 10px 28px rgba(8,79,160,0.2);
+      font-size: 14px;
+      font-weight: 950;
+      text-decoration: none;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .live-watch-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .live-watch-btn.secondary {
+      color: var(--deep);
+      border-color: var(--line);
+      background: rgba(255,255,255,0.7);
+      box-shadow: none;
+    }
+
+    body.dark .live-watch-btn.secondary {
+      color: #eafbff;
+      border-color: rgba(16,230,242,0.25);
+      background: rgba(8,12,20,0.86);
+      box-shadow: none;
+    }
+
+    .live-watch-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(8,79,160,0.28);
+    }
+
+    body.dark .live-watch-btn {
+      color: #031013;
+      border-color: rgba(31,255,210,0.95);
+      background: linear-gradient(135deg, #10e6f2, #1fffd2);
+      box-shadow: 0 0 26px rgba(16,230,242,0.18);
+    }
+
+    body.dark .panel {
+      position: relative;
+      overflow: hidden;
+    }
+
+    body.dark .panel::before,
+    body.dark .match-row::before,
+    body.dark .support-box::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 70% 18%, rgba(16,230,242,0.08), transparent 34%);
+      opacity: 0.9;
+    }
+
+    .login-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+
+    body.logged-in .login-screen { display: none; }
+
+    .login-card {
+      width: min(980px, 100%);
+      display: grid;
+      grid-template-columns: minmax(300px, 0.9fr) minmax(300px, 1.1fr);
+      gap: 22px;
+      align-items: stretch;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .login-form-side,
+    .login-brand-side {
+      position: relative;
+      z-index: 1;
+    }
+
+    .login-brand-side {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 360px;
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at 78% 26%, rgba(16, 230, 242, 0.22), transparent 32%),
+        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      overflow: hidden;
+    }
+
+    .login-brand-side::after {
+      content: "";
+      position: absolute;
+      inset: auto -18% -35% 18%;
+      height: 180px;
+      background: rgba(16, 230, 242, 0.18);
+      filter: blur(42px);
+      transform: rotate(-10deg);
+    }
+
+    .login-kicker {
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .login-brand-title {
+      position: relative;
+      z-index: 1;
+      margin: 14px 0 12px;
+      color: var(--deep);
+      font-size: clamp(34px, 5vw, 64px);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .login-brand-copy {
+      position: relative;
+      z-index: 1;
+      max-width: 440px;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 750;
+      line-height: 1.7;
+    }
+
+    .login-card h1 {
+      color: var(--deep);
+      font-size: 28px;
+      line-height: 1.2;
+    }
+
+    .login-field {
+      display: grid;
+      gap: 7px;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .login-field input {
+      width: 100%;
+      min-height: 46px;
+      padding: 0 13px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: var(--ink);
+      background: rgba(255,255,255,0.78);
+      outline: none;
+    }
+
+    body.dark .login-field input {
+      background: rgba(5, 8, 14, 0.9);
+      border-color: rgba(16, 230, 242, 0.14);
+      color: var(--ink);
+    }
+
+    .login-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .login-error {
+      min-height: 20px;
+      margin-top: 10px;
+      color: var(--red);
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .recovery-panel {
+      display: none;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--line);
+    }
+
+    .recovery-panel.show { display: block; }
+
+    .user-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .user-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--deep);
+      background: var(--soft);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .toolbar-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .search-wrap {
+      position: relative;
+      min-width: 0;
+    }
+
+    .search {
+      width: 100%;
+      min-height: 48px;
+      padding: 0 48px 0 15px;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      outline: none;
+      background: rgba(255,255,255,0.78);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
+    }
+
+    .clear-search {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      width: 34px;
+      height: 34px;
+      transform: translateY(-50%);
+      border: 0;
+      border-radius: 50%;
+      color: var(--muted);
+      background: transparent;
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: 950;
+    }
+
+    .clear-search:hover { color: var(--deep); background: var(--soft); }
+
+    body.dark .search {
+      background: rgba(5, 8, 14, 0.92);
+      border-color: rgba(16, 230, 242, 0.14);
+      color: var(--ink);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 0 24px rgba(16,230,242,0.04);
+    }
+    .search:focus { border-color: var(--blue); box-shadow: 0 0 0 4px rgba(11, 99, 206, 0.12); }
+    body.dark .search:focus { box-shadow: 0 0 0 3px rgba(16,230,242,0.16), 0 0 28px rgba(16,230,242,0.10); }
+
+    .segmented, .quick-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .chip-btn, .icon-btn, .action-btn {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.76);
+      color: var(--deep);
+      cursor: pointer;
+      font-weight: 900;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    body.dark .chip-btn,
+    body.dark .icon-btn,
+    body.dark .action-btn {
+      background: rgba(8, 12, 20, 0.86);
+      border-color: rgba(16, 230, 242, 0.17);
+      color: #eafbff;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.02) inset;
+    }
+    .chip-btn { min-height: 38px; padding: 8px 12px; border-radius: 999px; font-size: 13px; }
+    .icon-btn { width: 42px; height: 42px; border-radius: 999px; font-size: 18px; }
+    .chip-btn:hover, .icon-btn:hover, .action-btn:hover { transform: translateY(-1px); border-color: var(--blue); box-shadow: 0 8px 20px rgba(8, 79, 160, 0.12); }
+    .chip-btn.active { color: white; border-color: var(--blue); background: linear-gradient(135deg, var(--blue), var(--blue-2)); }
+    body.dark .chip-btn:hover,
+    body.dark .icon-btn:hover,
+    body.dark .action-btn:hover {
+      border-color: rgba(16, 230, 242, 0.62);
+      box-shadow: 0 0 24px rgba(16, 230, 242, 0.13);
+    }
+    body.dark .chip-btn.active,
+    body.dark .action-btn.primary {
+      color: #031013;
+      border-color: rgba(31,255,210,0.95);
+      background: linear-gradient(135deg, #10e6f2, #1fffd2);
+      box-shadow: 0 0 24px rgba(16, 230, 242, 0.22);
+    }
+
+    .top-nav .chip-btn,
+    body.dark .top-nav .chip-btn {
+      min-width: max-content;
+      min-height: 34px;
+      padding: 5px 7px;
+      font-size: 10px;
+      color: white;
+      border-color: #1587ff;
+      border-radius: 999px;
+      background: linear-gradient(145deg, #159dff, #075bc7);
+      box-shadow: 0 8px 22px rgba(8,79,160,0.26), 0 0 16px rgba(21,157,255,0.16);
+    }
+
+    .top-nav .chip-btn:hover,
+    body.dark .top-nav .chip-btn:hover {
+      color: white;
+      border-color: #63c7ff;
+      background: linear-gradient(145deg, #36b5ff, #0969db);
+      box-shadow: 0 11px 26px rgba(8,79,160,0.34), 0 0 22px rgba(21,157,255,0.28);
+      transform: translateY(-2px);
+    }
+
+    .search-help { margin-top: 10px; color: var(--muted); font-size: 13px; line-height: 1.6; font-weight: 700; }
+    .search-help strong { color: var(--deep); }
+
+    .history-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .history-chip {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 10px;
+      color: var(--deep);
+      background: var(--soft);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .stat-card {
+      padding: 13px 10px;
+      text-align: center;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.82), var(--soft));
+    }
+
+    body.dark .timer-box,
+    body.dark .stat-card,
+    body.dark .analysis-card,
+    body.dark .watch-item,
+    body.dark .activity-item,
+    body.dark .squad-card,
+    body.dark .empty-state {
+      border-color: rgba(16, 230, 242, 0.12);
+      background:
+        linear-gradient(180deg, rgba(18, 22, 32, 0.88), rgba(7, 10, 16, 0.92));
+      box-shadow: 0 14px 34px rgba(0,0,0,0.26);
+    }
+
+    .stat-card span { display: block; margin-bottom: 5px; color: var(--muted); font-size: 12px; font-weight: 850; }
+    .stat-card strong { color: var(--deep); font-size: 22px; font-weight: 950; }
+
+    .spotlight {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .next-title { margin: 0 0 7px; color: var(--deep); font-size: clamp(20px, 4vw, 30px); line-height: 1.2; }
+    .next-meta { margin: 0; color: var(--muted); font-size: 14px; font-weight: 750; line-height: 1.7; }
+    .next-count { display: inline-block; margin-top: 12px; padding: 9px 12px; border: 1px solid var(--line); border-radius: 13px; color: var(--deep); background: var(--soft); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-weight: 950; }
+
+    .support-box {
+      position: relative;
+      overflow: hidden;
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.82), rgba(231,244,255,0.92));
+    }
+
+    body.dark .support-box {
+      background:
+        radial-gradient(circle at 74% 40%, rgba(16,230,242,0.18), transparent 30%),
+        linear-gradient(135deg, rgba(14,18,29,0.92), rgba(8,11,18,0.96));
+      box-shadow: 0 0 38px rgba(16,230,242,0.08);
+    }
+    .support-box h2, .panel h2 { margin: 0 0 7px; color: var(--deep); font-size: 21px; }
+    .support-box p, .panel-copy { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; font-weight: 700; }
+
+    .progress-wrap { margin-top: 13px; }
+    .progress-text { display: flex; justify-content: space-between; color: var(--muted); font-size: 12px; font-weight: 850; margin-bottom: 6px; }
+    .progress-track { height: 10px; overflow: hidden; border: 1px solid var(--line); border-radius: 999px; background: var(--soft); }
+    .progress-fill { width: 0%; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--blue), #7fd0ff); transition: width 0.45s ease; }
+    body.dark .progress-fill {
+      background: linear-gradient(90deg, #10e6f2, #1fffd2);
+      box-shadow: 0 0 18px rgba(16,230,242,0.34);
+    }
+
+    .match-list { display: grid; gap: 12px; }
+
+    body.mobile-preview .match-list {
+      width: min(390px, 100%);
+      margin-inline: auto;
+    }
+
+    body.mobile-preview .match-row {
+      padding: 13px;
+    }
+
+    body.mobile-preview .teams {
+      font-size: 15px;
+    }
+
+    .match-row {
+      position: relative;
+      overflow: hidden;
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(247,251,255,0.92));
+      box-shadow: 0 8px 22px rgba(8, 79, 160, 0.07);
+      cursor: pointer;
+      animation: liftIn 0.35s ease both;
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    body.dark .match-row {
+      border-color: rgba(16, 230, 242, 0.12);
+      background:
+        radial-gradient(circle at 82% 20%, rgba(16,230,242,0.09), transparent 30%),
+        linear-gradient(180deg, rgba(17, 22, 33, 0.92), rgba(7, 10, 16, 0.95));
+      box-shadow: 0 14px 38px rgba(0,0,0,0.34);
+    }
+    .match-row:hover { transform: translateY(-2px); border-color: rgba(11, 99, 206, 0.55); box-shadow: 0 14px 32px rgba(8,79,160,0.12); }
+    body.dark .match-row:hover {
+      border-color: rgba(16, 230, 242, 0.54);
+      box-shadow: 0 18px 48px rgba(0,0,0,0.42), 0 0 32px rgba(16,230,242,0.12);
+    }
+
+    @keyframes liftIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .match-row h3 { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 5px; color: var(--deep); font-size: 18px; line-height: 1.35; }
+    .teams { margin: 0 0 4px; color: var(--ink); font-size: 16px; font-weight: 900; line-height: 1.55; }
+    .venue { margin: 0 0 9px; color: var(--muted); font-size: 14px; font-weight: 750; line-height: 1.55; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 22px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 950;
+      letter-spacing: 0;
+    }
+
+    .badge-upcoming { color: var(--blue); background: #e9f5ff; border: 1px solid #a8d7ff; }
+    .badge-soon { color: var(--orange); background: #fff6e8; border: 1px solid #fed7aa; }
+    .badge-live { color: var(--green); background: #e8fff4; border: 1px solid #8ce2bd; }
+    .badge-done { color: #758195; background: #f1f5f9; border: 1px solid #d7dee8; }
+    body.dark .badge-upcoming,
+    body.dark .badge-soon,
+    body.dark .badge-live,
+    body.dark .badge-done {
+      background: rgba(7, 11, 18, 0.86);
+      border-color: rgba(16, 230, 242, 0.24);
+      color: var(--blue);
+    }
+
+    .match-timer {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .match-timer-value {
+      padding: 4px 9px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      color: var(--deep);
+      background: var(--soft);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-weight: 950;
+    }
+
+    .match-actions {
+      display: none;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--line);
+    }
+
+    .match-row.open .match-actions { display: flex; }
+    .action-btn { min-height: 37px; padding: 8px 12px; border-radius: 999px; font-size: 12px; }
+    .action-btn.primary { color: white; border-color: var(--blue); background: linear-gradient(135deg, var(--blue), var(--blue-2)); }
+    .action-btn.active { border-color: #f4bd18; background: #fff4c6; color: #875b00; }
+    body.dark .action-btn.active {
+      background: rgba(16,230,242,0.14);
+      border-color: rgba(31,255,210,0.75);
+      color: #cffff8;
+    }
+
+    .match-row.favorite { border-color: #f4bd18; }
+    .match-row.watched { border-color: #91d9b5; }
+    body.dark .match-row.favorite { border-color: rgba(31,255,210,0.72); }
+    body.dark .match-row.watched { border-color: rgba(16,230,242,0.55); }
+    .match-row.hidden { display: none; }
+
+    .empty-state {
+      display: none;
+      padding: 18px;
+      border: 1px dashed var(--line);
+      border-radius: 18px;
+      text-align: center;
+      color: var(--muted);
+      background: var(--soft);
+      font-weight: 750;
+      line-height: 1.7;
+    }
+
+    .empty-state.show { display: block; }
+
+    .watch-list, .activity-list { display: grid; gap: 10px; margin-top: 12px; }
+    .watch-item { padding: 12px; border: 1px solid var(--line); border-radius: 16px; background: var(--soft); }
+    .watch-item strong { display: block; color: var(--deep); margin-bottom: 4px; }
+    .watch-item span { color: var(--muted); font-size: 13px; font-weight: 750; line-height: 1.55; }
+
+    .activity-item {
+      display: grid;
+      gap: 4px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.74), var(--soft));
+    }
+
+    body.dark .activity-item { background: linear-gradient(180deg, rgba(18,22,32,0.88), rgba(7,10,16,0.92)); }
+    .activity-item strong { color: var(--deep); font-size: 14px; }
+    .activity-item span { color: var(--muted); font-size: 12px; font-weight: 750; line-height: 1.5; }
+
+    .squad-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .poster-panel {
+      overflow: hidden;
+      padding: 14px;
+    }
+
+    .poster-hero {
+      display: grid;
+      grid-template-columns: 1fr 0.9fr;
+      gap: 14px;
+      align-items: stretch;
+      margin-bottom: 12px;
+    }
+
+    .poster-title {
+      min-height: 150px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at 12% 20%, rgba(16,230,242,0.18), transparent 30%),
+        linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+    }
+
+    .poster-title span {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .poster-title strong {
+      color: var(--deep);
+      font-size: clamp(34px, 6vw, 70px);
+      line-height: 0.95;
+      letter-spacing: 0;
+      margin-top: 8px;
+    }
+
+    .poster-info {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .poster-info-card,
+    .poster-group-card,
+    .poster-mini-card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.74), var(--soft));
+      padding: 12px;
+    }
+
+    body.dark .poster-info-card,
+    body.dark .poster-group-card,
+    body.dark .poster-mini-card,
+    body.dark .poster-title {
+      background:
+        radial-gradient(circle at 82% 10%, rgba(16,230,242,0.12), transparent 34%),
+        linear-gradient(180deg, rgba(18,22,32,0.88), rgba(7,10,16,0.92));
+      border-color: rgba(16,230,242,0.16);
+      box-shadow: 0 14px 34px rgba(0,0,0,0.24);
+    }
+
+    .poster-info-card span,
+    .poster-mini-card span {
+      display: block;
+      color: var(--blue);
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+
+    .poster-info-card strong,
+    .poster-mini-card strong {
+      display: block;
+      color: var(--deep);
+      line-height: 1.3;
+    }
+
+    .poster-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 260px;
+      gap: 12px;
+    }
+
+    .pdf-viewer-wrap {
+      min-width: 0;
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--soft);
+    }
+
+    body.dark .pdf-viewer-wrap {
+      background: linear-gradient(180deg, rgba(18,22,32,0.88), rgba(7,10,16,0.92));
+      border-color: rgba(16,230,242,0.16);
+    }
+
+    .pdf-viewer {
+      display: block;
+      width: 100%;
+      height: min(82vh, 920px);
+      min-height: 620px;
+      border: 0;
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .pdf-fallback {
+      margin: 8px 4px 2px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.5;
+    }
+
+    .poster-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      color: var(--ink);
+    }
+
+    .poster-table th,
+    .poster-table td {
+      padding: 8px 6px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .poster-table th {
+      color: var(--blue);
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .poster-groups {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .poster-group-card strong {
+      display: block;
+      color: var(--blue);
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .poster-team {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 850;
+      line-height: 1.45;
+      margin: 5px 0;
+    }
+
+    .poster-side {
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+
+    .poster-mini-card p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.55;
+    }
+
+    @media (max-width: 980px) {
+      .poster-hero,
+      .poster-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .poster-groups {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .squad-card {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.78), var(--soft));
+    }
+
+    body.dark .squad-card { background: linear-gradient(180deg, rgba(18,22,32,0.88), rgba(7,10,16,0.92)); }
+    .squad-card strong { display: block; color: var(--deep); margin-bottom: 4px; line-height: 1.35; }
+    .squad-card span { color: var(--muted); font-size: 12px; font-weight: 750; line-height: 1.5; }
+
+    .squad-card { padding: 0; overflow: hidden; }
+    .squad-card summary { padding: 13px; cursor: pointer; list-style: none; }
+    .squad-card summary::-webkit-details-marker { display: none; }
+    .squad-card summary::after { content: "+"; float: right; color: var(--blue); font-size: 18px; font-weight: 950; }
+    .squad-card[open] summary::after { content: "−"; }
+    .squad-card[open] summary { border-bottom: 1px solid var(--line); }
+    .squad-meta { display: block; margin-top: 3px; }
+    .squad-body { padding: 12px 13px 14px; }
+    .squad-coach { margin: 0 0 10px; color: var(--deep); font-size: 13px; font-weight: 850; }
+    .player-list { display: grid; gap: 5px; margin: 0; padding: 0; list-style: none; }
+    .player-list li { display: grid; grid-template-columns: 30px minmax(0,1fr); gap: 7px; align-items: start; padding: 6px 0; border-bottom: 1px solid rgba(127,145,170,0.13); }
+    .player-list li:last-child { border-bottom: 0; }
+    .player-pos { color: var(--blue); font-size: 11px; font-weight: 950; }
+    .player-name { display: block; color: var(--deep); font-size: 12px; font-weight: 850; }
+    .player-club { display: block; color: var(--muted); font-size: 11px; line-height: 1.4; }
+    .official-source { display: inline-flex; margin-top: 10px; color: var(--blue); font-size: 12px; font-weight: 900; text-decoration: none; }
+
+    @media (max-width: 820px) {
+      .squad-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 540px) {
+      .squad-grid { grid-template-columns: 1fr; }
+      .poster-info,
+      .poster-groups {
+        grid-template-columns: 1fr;
+      }
+
+      .pdf-viewer {
+        height: 72vh;
+        min-height: 500px;
+      }
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(5, 22, 42, 0.45);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .modal.show { display: flex; }
+    .modal-card {
+      width: min(680px, 100%);
+      max-height: min(760px, calc(100vh - 36px));
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--white);
+      box-shadow: 0 30px 90px rgba(0,0,0,0.25);
+      animation: modalIn 0.22s ease both;
+    }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(14px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .modal-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 15px; border-bottom: 1px solid var(--line); }
+    .modal-body { padding: 16px; }
+    .modal-title { margin: 0; color: var(--deep); font-size: 21px; line-height: 1.3; }
+    .close-btn { border: 1px solid var(--line); border-radius: 999px; width: 38px; height: 38px; color: var(--deep); background: var(--soft); cursor: pointer; font-weight: 950; }
+    .analysis-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 12px; }
+    .analysis-card { padding: 12px; border: 1px solid var(--line); border-radius: 16px; background: var(--soft); }
+    .analysis-card span { display: block; color: var(--muted); font-size: 12px; font-weight: 850; margin-bottom: 5px; }
+    .analysis-card strong { color: var(--deep); font-size: 17px; }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      z-index: 90;
+      transform: translateX(-50%) translateY(18px);
+      opacity: 0;
+      pointer-events: none;
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: white;
+      background: rgba(6, 63, 145, 0.94);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+      font-weight: 850;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    body.dark .toast {
+      color: #031013;
+      background: linear-gradient(135deg, #10e6f2, #1fffd2);
+      box-shadow: 0 0 28px rgba(16,230,242,0.28);
+    }
+
+    .back-top {
+      position: fixed;
+      right: 14px;
+      bottom: 18px;
+      z-index: 50;
+      display: none;
+      width: 46px;
+      height: 46px;
+      border: 0;
+      border-radius: 50%;
+      color: white;
+      background: var(--blue);
+      box-shadow: 0 12px 28px rgba(8,79,160,0.25);
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: 950;
+    }
+
+    .back-top.show { display: block; }
+    footer { padding: 24px 16px 30px; text-align: center; color: var(--muted); font-size: 13px; }
+    footer a { color: var(--deep); font-weight: 900; text-decoration: underline; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+    }
+
+    @media (max-width: 820px) {
+      .toolbar-grid, .spotlight { grid-template-columns: 1fr; }
+      .next-four-grid { grid-template-columns: repeat(2, 1fr); }
+      .timer-head, .toolbar-head, .section-head { flex-direction: column; }
+      .timer-sub { text-align: left; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .top-nav-row { justify-content: flex-start; overflow-x: auto; scrollbar-width: thin; }
+      .nav-account { position: sticky; right: 0; flex: 0 0 auto; background: rgba(4,53,116,0.96); }
+    }
+
+    @media (max-width: 540px) {
+      header { padding-top: 96px; }
+      .timer-grid { grid-template-columns: repeat(2, 1fr); }
+      .panel, .timer-card { border-radius: 18px; padding: 13px; }
+      .chip-btn { font-size: 12px; padding: 8px 10px; }
+      .analysis-grid { grid-template-columns: 1fr; }
+      .bd-clock { border-radius: 18px; }
+      .next-four-grid { grid-template-columns: 1fr; }
+      .live-score-board { grid-template-columns: 1fr; gap: 5px; }
+      .score-center { justify-content: center; }
+      .live-watch-panel { align-items: stretch; flex-direction: column; }
+      .live-watch-actions { align-items: stretch; flex-direction: column; }
+      .live-watch-btn { width: 100%; }
+      .control-dock { margin-top: -10px; }
+    }
+
+    @media (max-width: 760px) {
+      .login-card {
+        grid-template-columns: 1fr;
+      }
+
+      .login-brand-side {
+        min-height: 240px;
+        order: -1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="login-screen" id="loginScreen" aria-label="Login">
+    <form class="login-card" id="loginForm">
+      <div class="login-form-side">
+        <h1 id="loginTitle">লগইন করুন</h1>
+        <p class="panel-copy" id="loginCopy">আপনার ইউজারনেম ও পাসওয়ার্ড দিয়ে নিজের ওয়াচ লিস্ট, সাপোর্ট হিস্ট্রি এবং সার্চ হিস্ট্রি দেখুন।</p>
+        <label class="login-field">
+          <span id="usernameLabel">ইউজারনেম</span>
+          <input id="loginUsername" type="text" autocomplete="username" value="admin" />
+        </label>
+        <label class="login-field">
+          <span id="passwordLabel">পাসওয়ার্ড</span>
+          <input id="loginPassword" type="password" autocomplete="current-password" value="admin123" />
+        </label>
+        <div class="login-actions">
+          <button class="chip-btn active" type="submit" id="loginBtn">লগইন</button>
+          <button class="chip-btn" type="button" id="createUserBtn">নতুন ইউজার তৈরি</button>
+          <button class="chip-btn" type="button" id="forgotBtn">আইডি/পাসওয়ার্ড ভুলে গেছেন?</button>
+          <button class="chip-btn" type="button" id="loginLangBtn">English</button>
+        </div>
+        <div class="login-error" id="loginError"></div>
+        <div class="recovery-panel" id="recoveryPanel">
+          <p class="panel-copy" id="recoveryCopy">ইমেইল বা ফোন নম্বর দিয়ে আপনার লোকাল ইউজার আইডি খুঁজুন।</p>
+          <label class="login-field">
+            <span id="emailLabel">ইমেইল</span>
+            <input id="recoveryEmail" type="email" autocomplete="email" placeholder="you@example.com" />
+          </label>
+          <label class="login-field">
+            <span id="phoneLabel">ফোন নম্বর</span>
+            <input id="recoveryPhone" type="tel" autocomplete="tel" placeholder="+8801XXXXXXXXX" />
+          </label>
+          <div class="login-actions">
+            <button class="chip-btn active" type="button" id="recoverBtn">রিকভার</button>
+          </div>
+          <div class="login-error" id="recoveryResult"></div>
+        </div>
+      </div>
+      <div class="login-brand-side">
+        <span class="login-kicker" id="loginKicker">Bangladesh Time</span>
+        <h2 class="login-brand-title" id="loginBrandTitle">FIFA World Cup 2026 Countdown</h2>
+        <p class="login-brand-copy" id="loginBrandCopy">Welcome back. Sign in to continue your personal match watch list, favorites, support history, and countdown dashboard.</p>
+      </div>
+    </form>
+  </section>
+
+  <header>
+    <div class="hero-inner">
+      <h1 id="heroTitle">ফিফা বিশ্বকাপ ২০২৬ বাংলাদেশ কাউন্টডাউন</h1>
+      <p class="hero-copy" id="heroCopy">বাংলাদেশ সময় অনুযায়ী লাইভ ডিজিটাল কাউন্টডাউন, ১০৪ ম্যাচের তালিকা, ফেভারিট, ওয়াচ লিস্ট এবং সাপোর্টার অ্যানালাইসিস। সব ডেটা এই ফাইলের ভেতরেই আছে, তাই GitHub Pages-এ সরাসরি কাজ করবে।</p>
+      <div class="bd-clock" id="bdClock">Loading Bangladesh time...</div>
+    </div>
+  </header>
+
+  <section class="panel control-dock" id="matchControl">
+    <div class="toolbar-grid">
+      <div class="search-wrap">
+        <input class="search" id="searchInput" type="search" placeholder="দল, ভেন্যু, স্টেজ খুঁজুন... ব্রাজিল, আর্জেন্টিনা, নরওয়ে, ফাইনাল" autocomplete="off" />
+        <button class="clear-search" id="clearSearchBtn" type="button" aria-label="Clear search">×</button>
+      </div>
+      <div class="segmented" aria-label="View controls">
+        <button class="chip-btn active" type="button" data-view="browser" id="browserViewBtn">ব্রাউজার</button>
+        <button class="chip-btn" type="button" data-view="mobile" id="mobileViewBtn">মোবাইল</button>
+        <button class="chip-btn" type="button" id="languageBtn">English</button>
+        <button class="icon-btn" id="darkModeBtn" type="button" title="Dark mode">◐</button>
+      </div>
+    </div>
+    <div class="search-help" id="searchHelp">Try English or Bangla: <strong>Brazil</strong>, <strong>Argentina</strong>, <strong>Norway</strong>, <strong>Final</strong>, <strong>ব্রাজিল</strong>.</div>
+    <div class="history-strip" id="searchHistory"></div>
+  </section>
+
+  <section class="timer-card" aria-label="Main countdown" aria-live="polite">
+    <div class="timer-head">
+      <span class="live-dot" id="mainCountdownLabel">Live digital countdown</span>
+      <span class="timer-sub" id="firstStart">First match starts: 12 June, 1 AM BD Time</span>
+    </div>
+    <div class="first-match" id="firstMatch">Match 1: মেক্সিকো vs দক্ষিণ আফ্রিকা</div>
+    <div class="timer-grid">
+      <div class="timer-box"><strong id="days">00</strong><span id="daysLabel">Days</span></div>
+      <div class="timer-box"><strong id="hours">00</strong><span id="hoursLabel">Hours</span></div>
+      <div class="timer-box"><strong id="minutes">00</strong><span id="minutesLabel">Minutes</span></div>
+      <div class="timer-box"><strong id="seconds">00</strong><span id="secondsLabel">Seconds</span></div>
+    </div>
+    <div class="live-score-panel" id="liveScorePanel" aria-live="polite">
+      <div class="live-score-top"><span class="live-competition">FIFA World Cup 2026™</span><div class="live-score-links"><a class="google-live-link" id="googleLiveLink" href="https://www.google.com/search?q=fifa+live#sie=m;/g/11yrzsg0_1;2;/m/030q7;dt;fp;1;;;;-1" target="_blank" rel="noopener noreferrer">Google Live Score ↗</a><a class="google-live-link" href="https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/scores-fixtures" target="_blank" rel="noopener noreferrer">FIFA Scores ↗</a></div></div>
+      <div class="live-score-meta"><span id="liveKickoff">Kickoff: --</span><span id="liveMinute">Match time: --</span></div>
+      <span class="live-feed-status" id="liveFeedStatus">Live feed not configured</span>
+      <div class="live-score-board">
+        <div><div class="score-team"><span class="score-flag" id="scoreFlagA"></span><span id="scoreTeamA">Team A</span></div></div>
+        <div class="score-center"><strong class="score-value" id="scoreA">--</strong><span class="score-divider">–</span><strong class="score-value" id="scoreB">--</strong></div>
+        <div><div class="score-team"><span class="score-flag" id="scoreFlagB"></span><span id="scoreTeamB">Team B</span></div></div>
+      </div>
+      <div class="live-next-match"><strong id="liveNextTitle">Next match</strong><span id="liveNextCountdown">--</span></div>
+    </div>
+    <div class="timer-status" id="timerStatus">Starting timer...</div>
+    <div class="next-four-wrap">
+      <div class="next-four-head">
+        <strong id="nextFourTitle">পরবর্তী ৪ ম্যাচ</strong>
+      </div>
+      <div class="next-four-grid" id="nextFourGrid"></div>
+    </div>
+  </section>
+
+  <nav class="top-nav" aria-label="Main sections">
+    <div class="top-nav-row">
+      <button class="chip-btn" type="button" data-jump-target="home" id="navHome">হোম</button>
+      <button class="chip-btn" type="button" data-jump-target="matchControl" id="navControl">ম্যাচ কন্ট্রোল</button>
+      <button class="chip-btn" type="button" data-jump-target="matchListSection" id="navMatches">ম্যাচ তালিকা</button>
+      <button class="chip-btn" type="button" data-jump-target="liveWatchSection" id="navLive">FIFA Live</button>
+      <button class="chip-btn" type="button" data-jump-target="posterSection" id="navPdf" title="Full Schedule PDF" aria-label="Full Schedule PDF">Full Schedule PDF</button>
+      <button class="chip-btn" type="button" data-jump-target="supportPanelSection" id="navSupport">সাপোর্ট প্যানেল</button>
+      <button class="chip-btn" type="button" data-jump-target="favoriteSection" id="navFavorites">ফেভারিট</button>
+      <button class="chip-btn" type="button" data-jump-target="squadSection" id="navSquads">স্কোয়াড</button>
+      <button class="chip-btn" type="button" data-jump-target="watchSection" id="navWatch">ওয়াচ লিস্ট</button>
+      <button class="chip-btn" type="button" data-jump-target="supportHistorySection" id="navSupportHistory">সাপোর্ট হিস্ট্রি</button>
+      <button class="chip-btn" type="button" data-jump-target="historySection" id="navHistory">হিস্ট্রি</button>
+      <div class="nav-account"><span class="user-pill" id="userPill">ইউজার: admin</span><button class="chip-btn" type="button" id="logoutBtn">লগ আউট</button></div>
+    </div>
+  </nav>
+
+  <main class="container" id="home">
+    <section class="panel">
+      <div class="toolbar-head">
+        <div>
+          <h2 id="matchControlTitle">ম্যাচ কন্ট্রোল</h2>
+          <p class="panel-copy" id="matchControlCopy">ফিল্টার করুন, পরের ম্যাচে যান, ফেভারিট সেভ করুন, এবং আপনার ওয়াচ লিস্ট এই ব্রাউজারে রাখুন।</p>
+        </div>
+        <div class="quick-actions" id="filters">
+          <button class="chip-btn active" type="button" data-filter="all">সব</button>
+          <button class="chip-btn" type="button" data-filter="upcoming">আসছে</button>
+          <button class="chip-btn" type="button" data-filter="soon">শীঘ্রই</button>
+          <button class="chip-btn" type="button" data-filter="live">লাইভ</button>
+          <button class="chip-btn" type="button" data-filter="done">শেষ</button>
+          <button class="chip-btn" type="button" data-filter="favorite">ফেভারিট</button>
+          <button class="chip-btn" type="button" id="jumpNextBtn">পরের ম্যাচ</button>
+        </div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card"><span>Total</span><strong id="statTotal">104</strong></div>
+        <div class="stat-card"><span>Upcoming</span><strong id="statUpcoming">0</strong></div>
+        <div class="stat-card"><span>Soon</span><strong id="statSoon">0</strong></div>
+        <div class="stat-card"><span>Live</span><strong id="statLive">0</strong></div>
+        <div class="stat-card"><span>Done</span><strong id="statDone">0</strong></div>
+      </div>
+    </section>
+
+    <section class="panel spotlight" id="supportPanelSection">
+      <div>
+        <h2 class="next-title" id="nextTitle">Loading next match...</h2>
+        <p class="next-meta" id="nextMeta">Checking Bangladesh time...</p>
+        <div class="next-count" id="nextCountdown">--</div>
+        <div class="progress-wrap">
+          <div class="progress-text"><span>World Cup progress</span><span id="progressPercent">0%</span></div>
+          <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        </div>
+      </div>
+      <div class="support-box">
+        <h2 id="supportTitle">সাপোর্ট প্যানেল</h2>
+        <p id="supportCopy">যেকোনো ম্যাচ কার্ড থেকে আপনার পছন্দের দল সাপোর্ট করুন। সাপোর্ট কাউন্টার, অ্যানালাইসিস এবং সাপোর্ট হিস্ট্রি আপনার ইউজার প্রোফাইলে সেভ থাকবে।</p>
+      </div>
+    </section>
+
+    <section class="panel" id="matchListSection">
+      <div class="section-head">
+        <div>
+          <h2 id="fullListTitle">পূর্ণ ১০৪ ম্যাচের তালিকা</h2>
+          <p class="panel-copy" id="resultCount">সব ম্যাচ দেখানো হচ্ছে।</p>
+        </div>
+      </div>
+      <div class="match-list" id="matchList"></div>
+      <div class="empty-state" id="emptyState">
+        এই সার্চ ও ফিল্টারে কোনো ম্যাচ পাওয়া যায়নি। সার্চ ক্লিয়ার করুন অথবা সব ম্যাচে ফিরে যান।
+        <br><button class="chip-btn" type="button" id="resetSearchBtn">তালিকা রিসেট</button>
+      </div>
+    </section>
+
+    <section class="panel poster-panel" id="posterSection">
+      <div class="poster-hero">
+        <div class="poster-title">
+          <span id="posterKicker">Match schedule in Bangladesh time</span>
+          <strong id="posterTitle">FIFA World Cup 2026</strong>
+        </div>
+        <div class="poster-info">
+          <div class="poster-info-card"><span>▦</span><strong id="posterDate">12 June - 20 July 2026</strong></div>
+          <div class="poster-info-card"><span>◉</span><strong id="posterHost">USA, Canada & Mexico</strong></div>
+          <div class="poster-info-card"><span>◷</span><strong id="posterTime">Bangladesh Time GMT+6</strong></div>
+        </div>
+      </div>
+      <div class="poster-grid">
+        <div class="pdf-viewer-wrap">
+          <iframe
+            class="pdf-viewer"
+            id="embeddedSchedulePdf"
+            src="FIFA_World_Cup_2026_BD_Schedule_Bangla_Styled.pdf#view=FitH"
+            title="FIFA World Cup 2026 Bangladesh Time Schedule PDF">
+          </iframe>
+          <p class="pdf-fallback" id="pdfFallback">PDF এখানে সরাসরি লোড হয়েছে।</p>
+        </div>
+        <div class="poster-side">
+          <div class="poster-mini-card">
+            <span>✓</span>
+            <strong id="posterHowTitle">How to use</strong>
+            <p id="posterHowCopy">Search matches, support teams, mark watched games, and save favorites.</p>
+          </div>
+          <div class="poster-mini-card">
+            <span>★</span>
+            <strong id="posterWatchTitle">My Watch List</strong>
+            <p id="posterWatchCopy">Your watched matches stay saved in this browser profile.</p>
+          </div>
+          <div class="poster-mini-card">
+            <span>⚑</span>
+            <strong id="posterSupportTitle">Support History</strong>
+            <p id="posterSupportCopy">Track every team you support during the tournament.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel live-watch-panel" id="liveWatchSection">
+      <div class="live-watch-copy">
+        <h2 id="liveWatchTitle">FIFA লাইভ দেখুন</h2>
+      </div>
+      <div class="live-watch-actions">
+        <a class="live-watch-btn" id="liveWatchBtn" href="https://stream.codecloud.bd/index.php" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">সরাসরি সাইট ↗</a>
+      </div>
+    </section>
+
+    <section class="panel" id="favoriteSection">
+      <div class="section-head">
+        <div>
+          <h2 id="favoriteTitle">ফেভারিট ম্যাচ</h2>
+          <p class="panel-copy" id="favoriteCopy">আপনি যে ম্যাচগুলো ফেভারিট করেছেন সেগুলো এখানে দেখা যাবে।</p>
+        </div>
+      </div>
+      <div class="activity-list" id="favoriteList"></div>
+    </section>
+
+    <section class="panel" id="squadSection">
+      <div class="section-head">
+        <div>
+          <h2 id="squadTitle">দল ও স্কোয়াড</h2>
+          <p class="panel-copy" id="squadCopy">সব দলের নাম এখানে আছে। অফিসিয়াল প্লেয়ার স্কোয়াড নিশ্চিত হলে নিচের ডেটা অংশে নাম যোগ করলে এই সেকশন স্বয়ংক্রিয়ভাবে আপডেট হবে।</p>
+        </div>
+      </div>
+      <div class="squad-grid" id="squadGrid"></div>
+    </section>
+
+    <section class="panel" id="watchSection">
+      <h2 id="watchTitle">আমার ওয়াচ লিস্ট</h2>
+      <p class="panel-copy" id="watchCopy">ম্যাচ কার্ডে ক্লিক করে “দেখেছি” চাপুন। এই তালিকা আপনার লগইন করা ইউজারের জন্য সেভ থাকবে।</p>
+      <div class="watch-list" id="watchList"></div>
+    </section>
+
+    <section class="panel" id="supportHistorySection">
+      <div class="section-head">
+        <div>
+          <h2 id="supportHistoryTitle">সাপোর্ট হিস্ট্রি</h2>
+          <p class="panel-copy" id="supportHistoryCopy">আপনি কোন ম্যাচে কোন দল সাপোর্ট করেছেন, সেটি এখানে আলাদা করে দেখা যাবে।</p>
+        </div>
+      </div>
+      <div class="activity-list" id="supportHistoryList"></div>
+    </section>
+
+    <section class="panel" id="historySection">
+      <div class="section-head">
+        <div>
+          <h2 id="historyTitle">ইউজার হিস্ট্রি</h2>
+          <p class="panel-copy" id="historyCopy">সাম্প্রতিক সার্চ, ভিউ, সাপোর্ট, ফেভারিট এবং ওয়াচ অ্যাকশন এই ইউজারের জন্য সেভ থাকবে।</p>
+        </div>
+        <button class="chip-btn" type="button" id="clearHistoryBtn">হিস্ট্রি মুছুন</button>
+      </div>
+      <div class="activity-list" id="activityList"></div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast">Saved</div>
+  <button class="back-top" id="backTop" type="button" aria-label="Back to top">↑</button>
+  <footer>Developed By <a href="https://tanvirnibir.com" target="_blank" rel="noopener noreferrer">TANVIR NIBIR</a></footer>
+
+  <script src="schedule-data.js"></script>
+  <script src="squad-data.js"></script>
+  <script src="live-config.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var MATCH_DURATION_MS = 2 * 60 * 60 * 1000;
+      var SOON_MS = 24 * 60 * 60 * 1000;
+      var FAVORITES_KEY = "fifaBdFavoritesV4";
+      var WATCHED_KEY = "fifaBdWatchedV4";
+      var SUPPORT_KEY = "fifaBdSupportV4";
+      var DARK_KEY = "fifaBdDarkModeV4";
+      var HISTORY_KEY = "fifaBdHistoryV4";
+      var SEARCH_HISTORY_KEY = "fifaBdSearchHistoryV4";
+      var USER_DB_KEY = "fifaBdUsersV1";
+      var SESSION_KEY = "fifaBdSessionV1";
+      var LANG_KEY = "fifaBdLanguageV1";
+      var PROFILE_KEYS = [FAVORITES_KEY, WATCHED_KEY, SUPPORT_KEY, HISTORY_KEY, SEARCH_HISTORY_KEY];
+      var activeUser = "";
+      var currentLang = localStorage.getItem(LANG_KEY) || "bn";
+
+      var teams = [
+        ["Mexico","মেক্সিকো"],["South Africa","দক্ষিণ আফ্রিকা"],["South Korea","দক্ষিণ কোরিয়া"],["Czech Republic","চেক প্রজাতন্ত্র"],
+        ["Canada","কানাডা"],["Bosnia and Herzegovina","বসনিয়া ও হার্জেগোভিনা"],["United States","যুক্তরাষ্ট্র"],["Paraguay","প্যারাগুয়ে"],
+        ["Qatar","কাতার"],["Switzerland","সুইজারল্যান্ড"],["Brazil","ব্রাজিল"],["Morocco","মরক্কো"],["Haiti","হাইতি"],["Scotland","স্কটল্যান্ড"],
+        ["Australia","অস্ট্রেলিয়া"],["Turkey","তুরস্ক"],["Germany","জার্মানি"],["Curacao","কুরাসাও"],["Netherlands","নেদারল্যান্ডস"],["Japan","জাপান"],
+        ["Ivory Coast","আইভরি কোস্ট"],["Ecuador","ইকুয়েডর"],["Sweden","সুইডেন"],["Tunisia","তিউনিসিয়া"],["Spain","স্পেন"],["Cape Verde","কেপ ভার্দে"],
+        ["Belgium","বেলজিয়াম"],["Egypt","মিশর"],["Saudi Arabia","সৌদি আরব"],["Uruguay","উরুগুয়ে"],["Iran","ইরান"],["New Zealand","নিউজিল্যান্ড"],
+        ["France","ফ্রান্স"],["Senegal","সেনেগাল"],["Iraq","ইরাক"],["Norway","নরওয়ে"],["Argentina","আর্জেন্টিনা"],["Algeria","আলজেরিয়া"],
+        ["Austria","অস্ট্রিয়া"],["Jordan","জর্ডান"],["Portugal","পর্তুগাল"],["DR Congo","ডি আর কঙ্গো"],["England","ইংল্যান্ড"],["Croatia","ক্রোয়েশিয়া"],
+        ["Ghana","ঘানা"],["Panama","পানামা"],["Uzbekistan","উজবেকিস্তান"],["Colombia","কলম্বিয়া"]
+      ];
+
+      var venues = [
+        "Mexico City, Mexico","Zapopan, Mexico","Toronto, Canada","Los Angeles, USA","Santa Clara, USA","New Jersey, USA","Miami, USA","Dallas, USA",
+        "Houston, USA","Kansas City, USA","Atlanta, USA","Foxborough, USA","Philadelphia, USA","Seattle, USA","Vancouver, Canada","Monterrey, Mexico"
+      ];
+
+      var officialSquads = window.FIFA_OFFICIAL_SQUADS || {};
+      var squadTeamAliases = {
+        "Bosnia and Herzegovina": "Bosnia And Herzegovina",
+        "Cape Verde": "Cabo Verde",
+        "DR Congo": "Congo DR",
+        "Ivory Coast": "Côte D'Ivoire",
+        "Curacao": "Curaçao",
+        "Czech Republic": "Czechia",
+        "Iran": "IR Iran",
+        "South Korea": "Korea Republic",
+        "Turkey": "Türkiye",
+        "United States": "USA"
+      };
+
+      var flagMap = {
+        "Mexico":"🇲🇽","South Africa":"🇿🇦","South Korea":"🇰🇷","Czech Republic":"🇨🇿","Canada":"🇨🇦","Bosnia and Herzegovina":"🇧🇦",
+        "United States":"🇺🇸","Paraguay":"🇵🇾","Qatar":"🇶🇦","Switzerland":"🇨🇭","Brazil":"🇧🇷","Morocco":"🇲🇦","Haiti":"🇭🇹",
+        "Scotland":"🏴","Australia":"🇦🇺","Turkey":"🇹🇷","Germany":"🇩🇪","Curacao":"🇨🇼","Netherlands":"🇳🇱","Japan":"🇯🇵",
+        "Ivory Coast":"🇨🇮","Ecuador":"🇪🇨","Sweden":"🇸🇪","Tunisia":"🇹🇳","Spain":"🇪🇸","Cape Verde":"🇨🇻","Belgium":"🇧🇪",
+        "Egypt":"🇪🇬","Saudi Arabia":"🇸🇦","Uruguay":"🇺🇾","Iran":"🇮🇷","New Zealand":"🇳🇿","France":"🇫🇷","Senegal":"🇸🇳",
+        "Iraq":"🇮🇶","Norway":"🇳🇴","Argentina":"🇦🇷","Algeria":"🇩🇿","Austria":"🇦🇹","Jordan":"🇯🇴","Portugal":"🇵🇹",
+        "DR Congo":"🇨🇩","England":"🏴","Croatia":"🇭🇷","Ghana":"🇬🇭","Panama":"🇵🇦","Uzbekistan":"🇺🇿","Colombia":"🇨🇴"
+      };
+
+      var alias = {};
+      teams.forEach(function (team) {
+        alias[team[0].toLowerCase()] = team[1];
+      });
+      alias["usa"] = "যুক্তরাষ্ট্র";
+      alias["america"] = "যুক্তরাষ্ট্র";
+      alias["norway"] = "নরওয়ে";
+      alias["final"] = "ফাইনাল";
+      alias["semi final"] = "সেমি ফাইনাল";
+      alias["quarter final"] = "কোয়ার্টার ফাইনাল";
+      alias["round of 16"] = "রাউন্ড অব ১৬";
+      alias["round of 32"] = "রাউন্ড অব ৩২";
+
+      function pad(value) { return String(value).padStart(2, "0"); }
+
+      function buildDate(matchNo) {
+        var start = new Date("2026-06-11T19:00:00Z"); // 12 June, 1 AM in Bangladesh.
+        var slot = [0, 3, 7, 10][(matchNo - 1) % 4];
+        var day = Math.floor((matchNo - 1) / 4);
+        if (matchNo > 72) day += Math.floor((matchNo - 73) / 2) + 2;
+        if (matchNo > 96) day += matchNo - 96;
+        return new Date(start.getTime() + ((day * 24 + slot) * 60 * 60 * 1000));
+      }
+
+      function formatDateLabel(date) {
+        return date.toLocaleDateString("en-GB", { day: "numeric", month: "long", timeZone: "Asia/Dhaka" });
+      }
+
+      function formatTimeLabel(date) {
+        return date.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true, timeZone: "Asia/Dhaka" }).replace(":00", "");
+      }
+
+      function formatBanglaTime(date) {
+        var parts = new Intl.DateTimeFormat("en-US", {
+          timeZone: "Asia/Dhaka", hour: "2-digit", minute: "2-digit", hourCycle: "h23"
+        }).formatToParts(date).reduce(function (result, part) {
+          result[part.type] = part.value;
+          return result;
+        }, {});
+        var hour = Number(parts.hour);
+        var hour12 = hour % 12 || 12;
+        var period = hour < 4 ? "রাত" : hour < 6 ? "ভোর" : hour < 12 ? "সকাল" : hour < 15 ? "দুপুর" : hour < 18 ? "বিকেল" : hour < 20 ? "সন্ধ্যা" : "রাত";
+        var minute = Number(parts.minute);
+        return period + " " + toBanglaDigits(hour12) + "টা" + (minute ? " " + toBanglaDigits(String(minute).padStart(2, "0")) + " মিনিট" : "");
+      }
+
+      function isoBangladesh(date) {
+        var parts = new Intl.DateTimeFormat("en-CA", {
+          timeZone: "Asia/Dhaka", year: "numeric", month: "2-digit", day: "2-digit",
+          hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false
+        }).formatToParts(date).reduce(function (acc, part) { acc[part.type] = part.value; return acc; }, {});
+        return parts.year + "-" + parts.month + "-" + parts.day + "T" + parts.hour + ":" + parts.minute + ":" + parts.second + "+06:00";
+      }
+
+      function stageFor(no) {
+        if (no <= 72) return "Group Stage";
+        if (no <= 88) return "Round of 32";
+        if (no <= 96) return "Round of 16";
+        if (no <= 100) return "Quarter Final";
+        if (no <= 102) return "Semi Final";
+        if (no === 103) return "Third Place";
+        return "Final";
+      }
+
+      function knockoutLabelBn(value) {
+        return String(value || "")
+          .replace(/Winner Match (\d+)/g, "ম্যাচ $1 বিজয়ী")
+          .replace(/Loser Match (\d+)/g, "ম্যাচ $1 পরাজিত")
+          .replace(/Group ([A-L]) winner/g, "গ্রুপ $1 বিজয়ী")
+          .replace(/Group ([A-L]) runner-up/g, "গ্রুপ $1 রানার্স-আপ")
+          .replace(/Third place Group /g, "তৃতীয় স্থান গ্রুপ ")
+          .replace(/Knockout/g, "নকআউট");
+      }
+
+      function teamData(name) {
+        var found = teams.find(function (team) { return team[0] === name; });
+        return found || [name, knockoutLabelBn(name)];
+      }
+
+      function buildMatches() {
+        var source = Array.isArray(window.FIFA_PDF_SCHEDULE) ? window.FIFA_PDF_SCHEDULE : [];
+        return source.map(function (row) {
+          var date = new Date(row[1]);
+          var a = teamData(row[4]);
+          var b = teamData(row[5]);
+          return {
+            id: row[0],
+            teamA: a[0],
+            teamABn: a[1],
+            teamB: b[0],
+            teamBBn: b[1],
+            stage: row[2],
+            group: row[3],
+            venue: row[6],
+            bd: row[1],
+            dateLabel: formatDateLabel(date),
+            dateLabelBn: date.toLocaleDateString("bn-BD", { day: "numeric", month: "long", timeZone: "Asia/Dhaka" }),
+            timeLabel: formatTimeLabel(date),
+            timeLabelBn: formatBanglaTime(date),
+            isPlaceholder: row[0] >= 73,
+            sourceNote: "FIFA World Cup 2026 BD Schedule PDF"
+          };
+        }).sort(function (a, b) { return a.id - b.id; });
+      }
+
+      var matches = buildMatches();
+      var currentFilter = "all";
+      var currentView = "browser";
+      var searchLogTimer = null;
+      var liveFeedFixtures = [];
+      var liveFeedUpdatedAt = "";
+      var liveFeedError = "";
+      var liveScoreEndpoint = String(window.FIFA_LIVE_SCORE_ENDPOINT || "").trim();
+      var liveRefreshMs = Math.max(30000, Number(window.FIFA_LIVE_REFRESH_SECONDS || 60) * 1000);
+
+      function matchTime(match) {
+        return currentLang === "bn" ? match.timeLabelBn : match.timeLabel;
+      }
+
+      function normalizeTeamName(value) {
+        var name = String(value || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
+        var names = {
+          "usa": "united states", "us": "united states", "korea republic": "south korea", "czechia": "czech republic",
+          "turkiye": "turkey", "cabo verde": "cape verde", "congo dr": "dr congo", "ivory coast": "cote d ivoire",
+          "bosnia herzgeovina": "bosnia and herzegovina", "bosnia herzegovina": "bosnia and herzegovina"
+        };
+        return names[name] || name;
+      }
+
+      function liveFixtureFor(match) {
+        var teamA = normalizeTeamName(match.teamA);
+        var teamB = normalizeTeamName(match.teamB);
+        return liveFeedFixtures.filter(function (fixture) {
+          var home = normalizeTeamName(fixture.home && fixture.home.name);
+          var away = normalizeTeamName(fixture.away && fixture.away.name);
+          return (home === teamA && away === teamB) || (home === teamB && away === teamA);
+        })[0] || null;
+      }
+
+      function renderProviderScore(match, fallbackElapsed) {
+        var fixture = liveFixtureFor(match);
+        var teamAIsHome = fixture && normalizeTeamName(fixture.home.name) === normalizeTeamName(match.teamA);
+        els.scoreA.textContent = fixture && fixture.goals ? String(teamAIsHome ? fixture.goals.home : fixture.goals.away) : "--";
+        els.scoreB.textContent = fixture && fixture.goals ? String(teamAIsHome ? fixture.goals.away : fixture.goals.home) : "--";
+        var elapsed = fixture && Number.isFinite(Number(fixture.elapsed)) ? Number(fixture.elapsed) : fallbackElapsed;
+        var statusText = fixture && fixture.statusLong ? fixture.statusLong : "";
+        els.liveMinute.textContent = label("ম্যাচ সময়: " + bnNumber(elapsed) + " মিনিট" + (statusText ? " · " + statusText : ""), "Match time: " + elapsed + " min" + (statusText ? " · " + statusText : ""));
+        if (fixture) {
+          var updated = liveFeedUpdatedAt ? new Date(liveFeedUpdatedAt).toLocaleTimeString(currentLang === "bn" ? "bn-BD" : "en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit" }) : "";
+          els.liveFeedStatus.textContent = label("লাইভ ডেটা: API-Football" + (updated ? " · আপডেট " + updated : ""), "Live data: API-Football" + (updated ? " · Updated " + updated : ""));
+        } else if (!liveScoreEndpoint) {
+          els.liveFeedStatus.textContent = label("লাইভ API এখনো কনফিগার করা হয়নি", "Live API is not configured yet");
+        } else {
+          els.liveFeedStatus.textContent = liveFeedError ? label("লাইভ ডেটা পাওয়া যায়নি", "Live data unavailable") : label("Provider-এ এই ম্যাচের ডেটা এখনো নেই", "Provider has no data for this match yet");
+        }
+      }
+
+      async function refreshLiveFeed() {
+        if (!liveScoreEndpoint) return;
+        try {
+          var response = await fetch(liveScoreEndpoint, { cache: "no-store" });
+          if (!response.ok) throw new Error("Live feed HTTP " + response.status);
+          var payload = await response.json();
+          liveFeedFixtures = Array.isArray(payload.fixtures) ? payload.fixtures : [];
+          liveFeedUpdatedAt = payload.updatedAt || new Date().toISOString();
+          liveFeedError = "";
+        } catch (error) {
+          liveFeedError = error && error.message ? error.message : "Live feed failed";
+        }
+        updateCountdowns();
+      }
+
+      var $ = function (id) { return document.getElementById(id); };
+      var els = {
+        loginForm: $("loginForm"), loginUsername: $("loginUsername"), loginPassword: $("loginPassword"), loginError: $("loginError"),
+        createUser: $("createUserBtn"), loginLang: $("loginLangBtn"), loginTitle: $("loginTitle"), loginCopy: $("loginCopy"),
+        loginKicker: $("loginKicker"), loginBrandTitle: $("loginBrandTitle"), loginBrandCopy: $("loginBrandCopy"),
+        forgot: $("forgotBtn"), recoveryPanel: $("recoveryPanel"), recoveryCopy: $("recoveryCopy"), recoveryEmail: $("recoveryEmail"),
+        recoveryPhone: $("recoveryPhone"), emailLabel: $("emailLabel"), phoneLabel: $("phoneLabel"), recover: $("recoverBtn"), recoveryResult: $("recoveryResult"),
+        usernameLabel: $("usernameLabel"), passwordLabel: $("passwordLabel"), loginBtn: $("loginBtn"), userPill: $("userPill"), logout: $("logoutBtn"),
+        heroTitle: $("heroTitle"), heroCopy: $("heroCopy"), language: $("languageBtn"), browserView: $("browserViewBtn"), mobileView: $("mobileViewBtn"),
+        posterKicker: $("posterKicker"), posterTitle: $("posterTitle"), posterDate: $("posterDate"), posterHost: $("posterHost"), posterTime: $("posterTime"),
+        pdfFallback: $("pdfFallback"), posterHowTitle: $("posterHowTitle"), posterHowCopy: $("posterHowCopy"),
+        posterWatchTitle: $("posterWatchTitle"), posterWatchCopy: $("posterWatchCopy"), posterSupportTitle: $("posterSupportTitle"), posterSupportCopy: $("posterSupportCopy"),
+        liveWatchTitle: $("liveWatchTitle"), liveWatchBtn: $("liveWatchBtn"),
+        matchControlTitle: $("matchControlTitle"), matchControlCopy: $("matchControlCopy"), supportTitle: $("supportTitle"), supportCopy: $("supportCopy"),
+        fullListTitle: $("fullListTitle"), favoriteTitle: $("favoriteTitle"), favoriteCopy: $("favoriteCopy"), favoriteList: $("favoriteList"),
+        squadTitle: $("squadTitle"), squadCopy: $("squadCopy"), squadGrid: $("squadGrid"),
+        watchTitle: $("watchTitle"), watchCopy: $("watchCopy"), supportHistoryTitle: $("supportHistoryTitle"), supportHistoryCopy: $("supportHistoryCopy"),
+        supportHistoryList: $("supportHistoryList"), historyTitle: $("historyTitle"), historyCopy: $("historyCopy"),
+        bdClock: $("bdClock"), days: $("days"), hours: $("hours"), minutes: $("minutes"), seconds: $("seconds"),
+        daysLabel: $("daysLabel"), hoursLabel: $("hoursLabel"), minutesLabel: $("minutesLabel"), secondsLabel: $("secondsLabel"),
+        mainCountdownLabel: $("mainCountdownLabel"), timerStatus: $("timerStatus"), firstMatch: $("firstMatch"), firstStart: $("firstStart"), search: $("searchInput"),
+        liveScorePanel: $("liveScorePanel"), liveKickoff: $("liveKickoff"), liveMinute: $("liveMinute"), liveFeedStatus: $("liveFeedStatus"), scoreTeamA: $("scoreTeamA"), scoreTeamB: $("scoreTeamB"), scoreFlagA: $("scoreFlagA"), scoreFlagB: $("scoreFlagB"), scoreA: $("scoreA"), scoreB: $("scoreB"), liveNextTitle: $("liveNextTitle"), liveNextCountdown: $("liveNextCountdown"), googleLiveLink: $("googleLiveLink"),
+        nextFourTitle: $("nextFourTitle"), nextFourGrid: $("nextFourGrid"),
+        searchHelp: $("searchHelp"), searchHistory: $("searchHistory"), clearSearch: $("clearSearchBtn"), resetSearch: $("resetSearchBtn"),
+        filters: $("filters"), matchList: $("matchList"), watchList: $("watchList"), emptyState: $("emptyState"), activityList: $("activityList"),
+        resultCount: $("resultCount"), statTotal: $("statTotal"), statUpcoming: $("statUpcoming"), statSoon: $("statSoon"),
+        statLive: $("statLive"), statDone: $("statDone"), nextTitle: $("nextTitle"), nextMeta: $("nextMeta"),
+        nextCountdown: $("nextCountdown"), progressFill: $("progressFill"), progressPercent: $("progressPercent"),
+        jumpNext: $("jumpNextBtn"), darkMode: $("darkModeBtn"), backTop: $("backTop"), toast: $("toast"),
+        clearHistory: $("clearHistoryBtn")
+      };
+
+      function storageKey(key) {
+        if (activeUser && PROFILE_KEYS.indexOf(key) !== -1) return key + "::" + activeUser.toLowerCase();
+        return key;
+      }
+
+      function load(key, fallback) {
+        try {
+          var value = localStorage.getItem(storageKey(key));
+          return value ? JSON.parse(value) : fallback;
+        } catch (error) {
+          return fallback;
+        }
+      }
+
+      function save(key, value) {
+        try { localStorage.setItem(storageKey(key), JSON.stringify(value)); } catch (error) {}
+      }
+
+      function loadUsers() {
+        try {
+          var value = localStorage.getItem(USER_DB_KEY);
+          var users = value ? JSON.parse(value) : {};
+          if (!users || typeof users !== "object" || Array.isArray(users)) users = {};
+          if (!users.admin) {
+            users.admin = { password: "admin123", email: "admin@example.com", phone: "+8801000000000", createdAt: new Date().toISOString() };
+          } else {
+            if (!users.admin.email) users.admin.email = "admin@example.com";
+            if (!users.admin.phone) users.admin.phone = "+8801000000000";
+          }
+          localStorage.setItem(USER_DB_KEY, JSON.stringify(users));
+          return users;
+        } catch (error) {
+          return { admin: { password: "admin123", email: "admin@example.com", phone: "+8801000000000", createdAt: new Date().toISOString() } };
+        }
+      }
+
+      function saveUsers(users) {
+        try { localStorage.setItem(USER_DB_KEY, JSON.stringify(users)); } catch (error) {}
+      }
+
+      function cleanIdList(value) {
+        if (!Array.isArray(value)) return [];
+        return value.map(function (item) { return Number(item); }).filter(function (id, index, list) {
+          return Number.isInteger(id) && id >= 1 && id <= matches.length && list.indexOf(id) === index;
+        });
+      }
+
+      function loadIdList(key) {
+        return cleanIdList(load(key, []));
+      }
+
+      function loadSupport() {
+        var saved = load(SUPPORT_KEY, {});
+        var cleaned = {};
+        if (!saved || typeof saved !== "object" || Array.isArray(saved)) return cleaned;
+        Object.keys(saved).forEach(function (id) {
+          var matchId = Number(id);
+          var match = matches[matchId - 1];
+          if (match && (saved[id] === match.teamA || saved[id] === match.teamB)) cleaned[matchId] = saved[id];
+        });
+        return cleaned;
+      }
+
+      function addHistory(type, text, match) {
+        var list = load(HISTORY_KEY, []);
+        if (!Array.isArray(list)) list = [];
+        list.unshift({
+          type: type,
+          text: String(text || ""),
+          matchId: match ? match.id : "",
+          teams: match ? match.teamA + " vs " + match.teamB : "",
+          time: new Date().toISOString()
+        });
+        save(HISTORY_KEY, list.slice(0, 18));
+        renderHistory();
+      }
+
+      function addSearchHistory(query, count) {
+        var q = String(query || "").trim();
+        if (!q) return;
+        var list = load(SEARCH_HISTORY_KEY, []);
+        if (!Array.isArray(list)) list = [];
+        list = list.filter(function (item) { return String(item.query || "").toLowerCase() !== q.toLowerCase(); });
+        list.unshift({ query: q, count: count, time: new Date().toISOString() });
+        save(SEARCH_HISTORY_KEY, list.slice(0, 8));
+        addHistory("Search", '"' + q + '" found ' + count + " match(es)", null);
+        renderSearchHistory();
+      }
+
+      function escapeHTML(value) {
+        return String(value || "").replace(/[&<>"']/g, function (char) {
+          return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[char];
+        });
+      }
+
+      function bnNumber(value) {
+        return currentLang === "bn" ? Number(value).toLocaleString("bn-BD") : String(value);
+      }
+
+      function toBanglaDigits(value) {
+        var digits = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
+        return String(value).replace(/\d/g, function (digit) { return digits[Number(digit)]; });
+      }
+
+      function label(bn, en) {
+        return currentLang === "bn" ? bn : en;
+      }
+
+      function applyLanguage() {
+        document.documentElement.lang = currentLang === "bn" ? "bn" : "en";
+        localStorage.setItem(LANG_KEY, currentLang);
+        els.loginTitle.textContent = label("লগইন করুন", "Login");
+        els.loginCopy.textContent = label("আপনার ইউজারনেম ও পাসওয়ার্ড দিয়ে নিজের ওয়াচ লিস্ট, সাপোর্ট হিস্ট্রি এবং সার্চ হিস্ট্রি দেখুন।", "Use your username and password to see your own watch list, support history, and search history.");
+        els.usernameLabel.textContent = label("ইউজারনেম", "Username");
+        els.passwordLabel.textContent = label("পাসওয়ার্ড", "Password");
+        els.loginBtn.textContent = label("লগইন", "Login");
+        els.createUser.textContent = label("নতুন ইউজার তৈরি", "Create User");
+        els.forgot.textContent = label("আইডি/পাসওয়ার্ড ভুলে গেছেন?", "Forgot ID/Password?");
+        els.loginLang.textContent = currentLang === "bn" ? "English" : "বাংলা";
+        els.recoveryCopy.textContent = label("ইমেইল বা ফোন নম্বর দিয়ে আপনার লোকাল ইউজার আইডি খুঁজুন।", "Find your local user ID using email or phone number.");
+        els.emailLabel.textContent = label("ইমেইল", "Email");
+        els.phoneLabel.textContent = label("ফোন নম্বর", "Phone number");
+        els.recover.textContent = label("রিকভার", "Recover");
+        els.loginKicker.textContent = "Bangladeshi Football Fan";
+        els.loginBrandTitle.textContent = "FIFA World Cup 2026 Countdown";
+        els.loginBrandCopy.textContent = "Welcome back, Football Fan. Sign in to continue your personal match watch list, favorites, support history, and countdown dashboard. This site is developed by TANVIR NIBIR.";
+        els.heroTitle.textContent = label("ফিফা বিশ্বকাপ ২০২৬ বাংলাদেশ কাউন্টডাউন", "FIFA World Cup 2026 BD Countdown");
+        els.heroCopy.textContent = label("বাংলাদেশ সময় অনুযায়ী লাইভ ডিজিটাল কাউন্টডাউন, ১০৪ ম্যাচের তালিকা, ফেভারিট, ওয়াচ লিস্ট এবং সাপোর্টার অ্যানালাইসিস।", "Live digital countdown, 104-match list, favorites, watch list, and supporter analysis in Bangladesh time.");
+        els.posterKicker.textContent = label("বাংলাদেশ সময় অনুযায়ী ম্যাচ সূচি", "Match schedule in Bangladesh time");
+        els.posterTitle.textContent = "FIFA World Cup 2026";
+        els.posterDate.textContent = label("১২ জুন - ২০ জুলাই ২০২৬", "12 June - 20 July 2026");
+        els.posterHost.textContent = label("যুক্তরাষ্ট্র, কানাডা ও মেক্সিকো", "USA, Canada & Mexico");
+        els.posterTime.textContent = label("বাংলাদেশ সময় GMT+6", "Bangladesh Time GMT+6");
+        els.pdfFallback.textContent = label("PDF এখানে সরাসরি লোড হয়েছে। ভিউয়ার কাজ না করলে ব্রাউজারের PDF সাপোর্ট চালু করুন।", "The PDF is loaded directly here. Enable browser PDF support if the viewer does not appear.");
+        els.posterHowTitle.textContent = label("কীভাবে ব্যবহার করবেন", "How to use");
+        els.posterHowCopy.textContent = label("ম্যাচ খুঁজুন, দল সাপোর্ট করুন, দেখা ম্যাচ মার্ক করুন এবং ফেভারিট সেভ করুন।", "Search matches, support teams, mark watched games, and save favorites.");
+        els.posterWatchTitle.textContent = label("আমার ওয়াচ লিস্ট", "My Watch List");
+        els.posterWatchCopy.textContent = label("আপনার দেখা ম্যাচ এই ব্রাউজার প্রোফাইলে সেভ থাকবে।", "Your watched matches stay saved in this browser profile.");
+        els.posterSupportTitle.textContent = label("সাপোর্ট হিস্ট্রি", "Support History");
+        els.posterSupportCopy.textContent = label("টুর্নামেন্টে আপনি কোন দল সাপোর্ট করছেন তা ট্র্যাক করুন।", "Track every team you support during the tournament.");
+        els.liveWatchTitle.textContent = label("FIFA লাইভ দেখুন", "Watch FIFA Live");
+        els.liveWatchBtn.textContent = label("সরাসরি সাইট ↗", "DIRECT SITE ↗");
+        els.nextFourTitle.textContent = label("পরবর্তী ৪ ম্যাচ", "Next 4 Matches");
+        els.search.placeholder = label("দল, ভেন্যু, স্টেজ খুঁজুন... ব্রাজিল, আর্জেন্টিনা, নরওয়ে, ফাইনাল", "Search team, venue, stage... Brazil, Argentina, Norway, Final");
+        els.browserView.textContent = label("ব্রাউজার", "Browser");
+        els.mobileView.textContent = label("মোবাইল", "Mobile");
+        els.language.textContent = currentLang === "bn" ? "English" : "বাংলা";
+        els.matchControlTitle.textContent = label("ম্যাচ কন্ট্রোল", "Match Control");
+        els.matchControlCopy.textContent = label("ফিল্টার করুন, পরের ম্যাচে যান, ফেভারিট সেভ করুন, এবং আপনার ওয়াচ লিস্ট এই ব্রাউজারে রাখুন।", "Filter, jump to the next match, save favorites, and keep your watch list in this browser.");
+        els.supportTitle.textContent = label("সাপোর্ট প্যানেল", "Support Panel");
+        els.supportCopy.textContent = label("যেকোনো ম্যাচ কার্ড থেকে আপনার পছন্দের দল সাপোর্ট করুন। সাপোর্ট কাউন্টার, অ্যানালাইসিস এবং সাপোর্ট হিস্ট্রি আপনার ইউজার প্রোফাইলে সেভ থাকবে।", "Choose your team from any match card. Support counters, analysis, and support history stay saved in your profile.");
+        els.fullListTitle.textContent = label("পূর্ণ ১০৪ ম্যাচের তালিকা", "Full 104-Match List");
+        els.favoriteTitle.textContent = label("ফেভারিট ম্যাচ", "Favorite Matches");
+        els.favoriteCopy.textContent = label("আপনি যে ম্যাচগুলো ফেভারিট করেছেন সেগুলো এখানে দেখা যাবে।", "Matches you favorite will appear here.");
+        els.squadTitle.textContent = label("দল ও স্কোয়াড", "Teams and Squads");
+        els.squadCopy.textContent = label("FIFA-এর ১২ জুন ২০২৬ প্রকাশিত অফিসিয়াল তালিকা অনুযায়ী ৪৮ দলের ১,২৪৮ জন খেলোয়াড় ও কোচ। দলের নাম চাপলে পূর্ণ স্কোয়াড খুলবে।", "All 1,248 players and coaches from FIFA's official squad list published on 12 June 2026. Select a team to open its full squad.");
+        els.watchTitle.textContent = label("আমার ওয়াচ লিস্ট", "My Watch List");
+        els.watchCopy.textContent = label("ম্যাচ কার্ডে ক্লিক করে “দেখেছি” চাপুন। এই তালিকা আপনার লগইন করা ইউজারের জন্য সেভ থাকবে।", "Click a match card, then press “I watched”. This list is saved for your logged-in user.");
+        els.supportHistoryTitle.textContent = label("সাপোর্ট হিস্ট্রি", "Support History");
+        els.supportHistoryCopy.textContent = label("আপনি কোন ম্যাচে কোন দল সাপোর্ট করেছেন, সেটি এখানে আলাদা করে দেখা যাবে।", "See every match where you supported a team.");
+        els.historyTitle.textContent = label("ইউজার হিস্ট্রি", "User History");
+        els.historyCopy.textContent = label("সাম্প্রতিক সার্চ, ভিউ, সাপোর্ট, ফেভারিট এবং ওয়াচ অ্যাকশন এই ইউজারের জন্য সেভ থাকবে।", "Recent searches, views, support picks, favorites, and watched actions are saved for this user.");
+        els.clearHistory.textContent = label("হিস্ট্রি মুছুন", "Clear History");
+        els.logout.textContent = label("লগ আউট", "Logout");
+        var filterLabels = {
+          all: [ "সব", "All" ],
+          upcoming: [ "আসছে", "Upcoming" ],
+          soon: [ "শীঘ্রই", "Soon" ],
+          live: [ "লাইভ", "Live" ],
+          done: [ "শেষ", "Done" ],
+          favorite: [ "ফেভারিট", "Favorites" ]
+        };
+        els.filters.querySelectorAll("[data-filter]").forEach(function (btn) {
+          var item = filterLabels[btn.dataset.filter];
+          if (item) btn.textContent = label(item[0], item[1]);
+        });
+        els.jumpNext.textContent = label("পরের ম্যাচ", "Jump to Next");
+        els.resetSearch.textContent = label("তালিকা রিসেট", "Reset list");
+        var navMap = {
+          navHome: ["হোম", "Home"], navControl: ["ম্যাচ কন্ট্রোল", "Match Control"], navMatches: ["ম্যাচ তালিকা", "Matches"], navPdf: ["Full Schedule PDF", "Full Schedule PDF"], navLive: ["FIFA লাইভ", "FIFA Live"],
+          navSupport: ["সাপোর্ট প্যানেল", "Support Panel"], navFavorites: ["ফেভারিট", "Favorites"], navSquads: ["স্কোয়াড", "Squads"],
+          navWatch: ["ওয়াচ লিস্ট", "Watch List"], navSupportHistory: ["সাপোর্ট হিস্ট্রি", "Support History"], navHistory: ["হিস্ট্রি", "History"]
+        };
+        Object.keys(navMap).forEach(function (id) {
+          var item = document.getElementById(id);
+          if (item) item.textContent = label(navMap[id][0], navMap[id][1]);
+        });
+        updateClock();
+        renderAll();
+      }
+
+      function getState(match, now) {
+        var ts = Date.parse(match.bd);
+        if (now >= ts && now < ts + MATCH_DURATION_MS) return "live";
+        if (now >= ts + MATCH_DURATION_MS) return "done";
+        if (ts - now <= SOON_MS) return "soon";
+        return "upcoming";
+      }
+
+      function diffText(ms) {
+        if (ms <= 0) return "";
+        var total = Math.floor(ms / 1000);
+        var d = Math.floor(total / 86400);
+        var h = Math.floor((total % 86400) / 3600);
+        var m = Math.floor((total % 3600) / 60);
+        var s = total % 60;
+        if (d > 0) return d + "d " + pad(h) + "h " + pad(m) + "m " + pad(s) + "s";
+        return pad(h) + "h " + pad(m) + "m " + pad(s) + "s";
+      }
+
+      function normalizeQuery(value) {
+        var original = String(value || "").toLowerCase().trim();
+        var converted = original;
+        Object.keys(alias).sort(function (a, b) { return b.length - a.length; }).forEach(function (key) {
+          converted = converted.replace(new RegExp("\\b" + key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b", "gi"), alias[key]);
+        });
+        return [original, converted.toLowerCase()];
+      }
+
+      function textMatchesQuery(text, queryValue) {
+        var q = String(queryValue || "").toLowerCase().trim();
+        if (!q) return true;
+        var words = q.split(/\s+/).filter(Boolean);
+        return words.every(function (word) { return text.indexOf(word) !== -1; });
+      }
+
+      function searchText(match) {
+        return [
+          match.id, "match " + match.id, match.teamA, match.teamB, match.teamABn, match.teamBBn,
+          match.stage, match.venue, match.dateLabel, match.timeLabel, match.timeLabelBn,
+          "browser mobile support support me analysis history favorite watched watch list"
+        ].join(" ").toLowerCase();
+      }
+
+      function renderMatches() {
+        var favorites = loadIdList(FAVORITES_KEY);
+        var watched = loadIdList(WATCHED_KEY);
+        var support = loadSupport();
+        save(FAVORITES_KEY, favorites);
+        save(WATCHED_KEY, watched);
+        save(SUPPORT_KEY, support);
+        els.matchList.innerHTML = matches.map(function (match) {
+          var isFav = favorites.indexOf(match.id) !== -1;
+          var isWatched = watched.indexOf(match.id) !== -1;
+          var teamSupport = support[match.id] || "";
+          var teamA = currentLang === "bn" ? match.teamABn : match.teamA;
+          var teamB = currentLang === "bn" ? match.teamBBn : match.teamB;
+          var title = label("ম্যাচ " + bnNumber(match.id) + " - " + escapeHTML(match.dateLabelBn), "Match " + match.id + " - " + escapeHTML(match.dateLabel));
+          return '<article class="match-row' + (isFav ? ' favorite' : '') + (isWatched ? ' watched' : '') + '" id="match-' + match.id + '" data-id="' + match.id + '" data-search="' + escapeHTML(searchText(match)) + '">' +
+            '<h3>' + title + ' <span class="badge badge-upcoming" data-badge>--</span></h3>' +
+            '<p class="teams">' + escapeHTML(teamA) + ' vs ' + escapeHTML(teamB) + ' - ' + escapeHTML(matchTime(match)) + '</p>' +
+            '<p class="venue">' + label("ভেন্যু: ", "Venue: ") + escapeHTML(match.venue) + '</p>' +
+            (match.isPlaceholder ? '<p class="venue">' + label("নোট: অফিসিয়াল দল নিশ্চিত হলে এই কার্ড আপডেট হবে।", "Note: this card will be updated when official teams are known.") + '</p>' : '') +
+            '<div class="match-timer"><span>' + label("বাংলাদেশ কাউন্টডাউন:", "BD Countdown:") + '</span><span class="match-timer-value" data-countdown>--</span></div>' +
+            '<div class="match-actions">' +
+              '<button class="action-btn' + (teamSupport === match.teamA ? ' active' : '') + '" type="button" data-action="support-a">' + label("সাপোর্ট ", "Support ") + escapeHTML(teamA) + '</button>' +
+              '<button class="action-btn' + (teamSupport === match.teamB ? ' active' : '') + '" type="button" data-action="support-b">' + label("সাপোর্ট ", "Support ") + escapeHTML(teamB) + '</button>' +
+              '<button class="action-btn" type="button" data-action="favorite">' + (isFav ? label("★ ফেভারিট", "★ Favorite") : label("☆ ফেভারিট", "☆ Favorite")) + '</button>' +
+              '<button class="action-btn primary" type="button" data-action="watched">' + (isWatched ? label("দেখেছি ✓", "Watched ✓") : label("দেখেছি", "I watched")) + '</button>' +
+            '</div>' +
+          '</article>';
+        }).join("");
+      }
+
+      function updateClock() {
+        var now = new Date();
+        if (currentLang === "en") {
+          els.bdClock.textContent = "Bangladesh Time: " + now.toLocaleString("en-US", {
+            timeZone: "Asia/Dhaka", weekday: "long", day: "2-digit", month: "long", year: "numeric",
+            hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: true
+          });
+          return;
+        }
+
+        var parts = new Intl.DateTimeFormat("en-US", {
+          timeZone: "Asia/Dhaka", weekday: "long", day: "2-digit", month: "numeric", year: "numeric",
+          hour: "2-digit", minute: "2-digit", second: "2-digit", hourCycle: "h23"
+        }).formatToParts(now).reduce(function (result, part) {
+          result[part.type] = part.value;
+          return result;
+        }, {});
+        var weekdays = { Sunday:"রবিবার", Monday:"সোমবার", Tuesday:"মঙ্গলবার", Wednesday:"বুধবার", Thursday:"বৃহস্পতিবার", Friday:"শুক্রবার", Saturday:"শনিবার" };
+        var months = ["জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"];
+        var hour24 = Number(parts.hour);
+        var hour12 = hour24 % 12 || 12;
+        var period = hour24 < 4 ? "রাত" : hour24 < 6 ? "ভোর" : hour24 < 12 ? "সকাল" : hour24 < 15 ? "দুপুর" : hour24 < 18 ? "বিকেল" : hour24 < 20 ? "সন্ধ্যা" : "রাত";
+        var banglaTime = toBanglaDigits(String(hour12).padStart(2, "0") + ":" + parts.minute + ":" + parts.second);
+        els.bdClock.textContent = "বাংলাদেশ সময়: " + weekdays[parts.weekday] + ", " + toBanglaDigits(parts.day) + " " + months[Number(parts.month) - 1] + ", " + toBanglaDigits(parts.year) + ", " + period + " " + banglaTime;
+      }
+
+      function updateCountdowns() {
+        var now = Date.now();
+        var next = null;
+        var stats = { upcoming: 0, soon: 0, live: 0, done: 0 };
+        var chronologicalMatches = matches.slice().sort(function (a, b) {
+          return Date.parse(a.bd) - Date.parse(b.bd);
+        });
+        document.getElementById("navPdf").title = "Full Schedule PDF";
+
+        matches.forEach(function (match) {
+          var state = getState(match, now);
+          stats[state] += 1;
+          var matchTs = Date.parse(match.bd);
+          if (matchTs > now && (!next || matchTs < Date.parse(next.bd))) next = match;
+        });
+
+        var liveMatch = chronologicalMatches.filter(function (match) {
+          return getState(match, now) === "live";
+        })[0] || null;
+        var featured = next || liveMatch;
+
+        els.daysLabel.textContent = label("দিন", "Days");
+        els.hoursLabel.textContent = label("ঘণ্টা", "Hours");
+        els.minutesLabel.textContent = label("মিনিট", "Minutes");
+        els.secondsLabel.textContent = label("সেকেন্ড", "Seconds");
+        els.mainCountdownLabel.className = "live-dot";
+
+        if (featured) {
+          var featuredStart = Date.parse(featured.bd);
+          var featuredState = getState(featured, now);
+          var countdownTarget = featuredState === "live" ? featuredStart + MATCH_DURATION_MS : featuredStart;
+          var mainDiff = Math.max(0, countdownTarget - now);
+          var total = Math.ceil(mainDiff / 1000);
+          els.days.textContent = pad(Math.floor(total / 86400));
+          els.hours.textContent = pad(Math.floor((total % 86400) / 3600));
+          els.minutes.textContent = pad(Math.floor((total % 3600) / 60));
+          els.seconds.textContent = pad(total % 60);
+
+          var featuredTeams = currentLang === "bn"
+            ? featured.teamABn + " vs " + featured.teamBBn
+            : featured.teamA + " vs " + featured.teamB;
+          var featuredDate = currentLang === "bn" ? featured.dateLabelBn : featured.dateLabel;
+          els.firstMatch.textContent = label(
+            "ম্যাচ " + bnNumber(featured.id) + " - " + featuredDate + ": " + featuredTeams,
+            "Match " + featured.id + " - " + featuredDate + ": " + featuredTeams
+          );
+          els.firstStart.textContent = label(
+            "বাংলাদেশ সময়: " + featured.timeLabelBn + " · ভেন্যু: " + featured.venue,
+            "BD Time: " + featured.timeLabel + " · Venue: " + featured.venue
+          );
+
+          if (featuredState === "live") {
+            els.mainCountdownLabel.textContent = label("এখন লাইভ · ম্যাচ শেষ হতে বাকি", "LIVE NOW · Match ends in");
+            els.mainCountdownLabel.classList.add("is-live");
+            var elapsedMinutes = Math.max(1, Math.min(120, Math.floor((now - featuredStart) / 60000) + 1));
+            els.liveScorePanel.classList.add("show");
+            els.liveScorePanel.dataset.matchId = featured.id;
+            els.liveKickoff.textContent = label("কিকঅফ: " + featured.timeLabelBn, "Kickoff: " + featured.timeLabel + " BD Time");
+            els.scoreTeamA.textContent = currentLang === "bn" ? featured.teamABn : featured.teamA;
+            els.scoreTeamB.textContent = currentLang === "bn" ? featured.teamBBn : featured.teamB;
+            els.scoreFlagA.textContent = flagMap[featured.teamA] || "⚽";
+            els.scoreFlagB.textContent = flagMap[featured.teamB] || "⚽";
+            renderProviderScore(featured, elapsedMinutes);
+            if (next) {
+              els.liveNextTitle.textContent = label("পরের ম্যাচ: " + next.teamABn + " vs " + next.teamBBn, "Next match: " + next.teamA + " vs " + next.teamB);
+              els.liveNextCountdown.textContent = diffText(Date.parse(next.bd) - now);
+            } else {
+              els.liveNextTitle.textContent = label("পরবর্তী ম্যাচ নেই", "No next match");
+              els.liveNextCountdown.textContent = label("শেষ", "Done");
+            }
+            els.timerStatus.textContent = label(
+              "ম্যাচ " + bnNumber(featured.id) + " এখন চলছে। ম্যাচ শেষ হলে পরবর্তী ম্যাচ স্বয়ংক্রিয়ভাবে এখানে দেখাবে।",
+              "Match " + featured.id + " is live. The next match will appear here automatically when it finishes."
+            );
+          } else {
+            els.liveScorePanel.classList.remove("show");
+            els.liveScorePanel.removeAttribute("data-match-id");
+            els.mainCountdownLabel.textContent = label("পরবর্তী ম্যাচ শুরু হতে বাকি", "Next match starts in");
+            els.timerStatus.textContent = label(
+              (liveMatch ? "বর্তমান ম্যাচটি লাইভ চলছে। " : "") + "ম্যাচ " + bnNumber(featured.id) + " শুরু হতে বাকি। কাউন্টডাউন বাংলাদেশ সময় অনুযায়ী চলছে।",
+              (liveMatch ? "The current match is live. " : "") + "Time remaining until Match " + featured.id + " in Bangladesh time."
+            );
+          }
+        } else {
+          els.liveScorePanel.classList.remove("show");
+          els.liveScorePanel.removeAttribute("data-match-id");
+          els.days.textContent = els.hours.textContent = els.minutes.textContent = els.seconds.textContent = "00";
+          els.mainCountdownLabel.textContent = label("টুর্নামেন্ট সম্পন্ন", "Tournament completed");
+          els.mainCountdownLabel.classList.add("is-complete");
+          els.firstMatch.textContent = label("ফিফা বিশ্বকাপ ২০২৬ সম্পন্ন হয়েছে", "FIFA World Cup 2026 is complete");
+          els.firstStart.textContent = label("সব ১০৪টি ম্যাচ শেষ", "All 104 matches completed");
+          els.timerStatus.textContent = label("কোনো আসন্ন ম্যাচ নেই।", "There are no upcoming matches.");
+        }
+
+        if (liveMatch) {
+          var liveStart = Date.parse(liveMatch.bd);
+          var elapsedMinutes = Math.max(1, Math.min(120, Math.floor((now - liveStart) / 60000) + 1));
+          els.liveScorePanel.classList.add("show");
+          els.liveScorePanel.dataset.matchId = liveMatch.id;
+          els.liveKickoff.textContent = label("কিকঅফ: " + liveMatch.timeLabelBn, "Kickoff: " + liveMatch.timeLabel + " BD Time");
+          els.scoreTeamA.textContent = currentLang === "bn" ? liveMatch.teamABn : liveMatch.teamA;
+          els.scoreTeamB.textContent = currentLang === "bn" ? liveMatch.teamBBn : liveMatch.teamB;
+          els.scoreFlagA.textContent = flagMap[liveMatch.teamA] || "⚽";
+          els.scoreFlagB.textContent = flagMap[liveMatch.teamB] || "⚽";
+          renderProviderScore(liveMatch, elapsedMinutes);
+          if (next) {
+            els.liveNextTitle.textContent = label("পরের ম্যাচ: " + next.teamABn + " vs " + next.teamBBn, "Next match: " + next.teamA + " vs " + next.teamB);
+            els.liveNextCountdown.textContent = diffText(Date.parse(next.bd) - now);
+          } else {
+            els.liveNextTitle.textContent = label("পরবর্তী ম্যাচ নেই", "No next match");
+            els.liveNextCountdown.textContent = label("শেষ", "Done");
+          }
+        } else {
+          els.liveScorePanel.classList.remove("show");
+          els.liveScorePanel.removeAttribute("data-match-id");
+        }
+
+        els.statTotal.textContent = matches.length;
+        els.statUpcoming.textContent = stats.upcoming;
+        els.statSoon.textContent = stats.soon;
+        els.statLive.textContent = stats.live;
+        els.statDone.textContent = stats.done;
+
+        if (next) {
+          els.nextTitle.textContent = label("পরের ম্যাচ: " + next.teamABn + " vs " + next.teamBBn, "Next Match: " + next.teamA + " vs " + next.teamB);
+          els.nextMeta.textContent = label("ম্যাচ " + bnNumber(next.id) + " - " + next.dateLabelBn + ", " + next.timeLabelBn + "। ভেন্যু: " + next.venue, "Match " + next.id + " - " + next.dateLabel + ", " + next.timeLabel + " BD Time. Venue: " + next.venue);
+          els.nextCountdown.textContent = diffText(Date.parse(next.bd) - now);
+        } else {
+          els.nextTitle.textContent = label("টুর্নামেন্ট শেষ", "Tournament completed");
+          els.nextMeta.textContent = label("কোনো আসন্ন ম্যাচ পাওয়া যায়নি।", "No upcoming match found.");
+          els.nextCountdown.textContent = label("শেষ", "Done");
+        }
+
+        var tournamentStart = Date.parse(matches[0].bd);
+        var tournamentEnd = Date.parse(matches[matches.length - 1].bd) + MATCH_DURATION_MS;
+        var percent = now <= tournamentStart ? 0 : now >= tournamentEnd ? 100 : ((now - tournamentStart) / (tournamentEnd - tournamentStart)) * 100;
+        els.progressFill.style.width = Math.max(0, Math.min(100, percent)).toFixed(1) + "%";
+        els.progressPercent.textContent = Math.round(percent) + "%";
+
+        document.querySelectorAll(".match-row").forEach(function (row) {
+          var match = matches[Number(row.dataset.id) - 1];
+          var state = getState(match, now);
+          var badge = row.querySelector("[data-badge]");
+          var timer = row.querySelector("[data-countdown]");
+          badge.className = "badge badge-" + state;
+          badge.textContent = currentLang === "bn" ? ({upcoming:"আসছে", soon:"শীঘ্রই", live:"লাইভ", done:"শেষ"}[state]) : state.toUpperCase();
+          if (state === "live") timer.textContent = label("এখন লাইভ", "LIVE NOW");
+          else if (state === "done") timer.textContent = label("শেষ", "DONE");
+          else timer.textContent = diffText(Date.parse(match.bd) - now);
+        });
+      }
+
+      function applyFilters() {
+        var now = Date.now();
+        var query = normalizeQuery(els.search.value);
+        var favorites = loadIdList(FAVORITES_KEY);
+        var visible = 0;
+
+        document.querySelectorAll(".match-row").forEach(function (row) {
+          var match = matches[Number(row.dataset.id) - 1];
+          var state = getState(match, now);
+          var text = row.dataset.search;
+          var qPass = !query[0] || textMatchesQuery(text, query[0]) || textMatchesQuery(text, query[1]);
+          var fPass = currentFilter === "all" || state === currentFilter || (currentFilter === "favorite" && favorites.indexOf(match.id) !== -1);
+          var show = qPass && fPass;
+          row.classList.toggle("hidden", !show);
+          if (show) visible += 1;
+        });
+
+        els.resultCount.textContent = visible === matches.length ? label("সব ম্যাচ দেখানো হচ্ছে।", "Showing all matches.") : label(bnNumber(visible) + " / " + bnNumber(matches.length) + " ম্যাচ দেখানো হচ্ছে।", "Showing " + visible + " of " + matches.length + " matches.");
+        els.emptyState.classList.toggle("show", visible === 0);
+        if (!query[0]) {
+          els.searchHelp.innerHTML = label('বাংলা বা ইংরেজিতে সার্চ করুন: <strong>Brazil</strong>, <strong>Argentina</strong>, <strong>Norway</strong>, <strong>Final</strong>, <strong>ব্রাজিল</strong>।', 'Try English or Bangla: <strong>Brazil</strong>, <strong>Argentina</strong>, <strong>Norway</strong>, <strong>Final</strong>, <strong>ব্রাজিল</strong>.');
+        } else if (query[0] !== query[1]) {
+          els.searchHelp.innerHTML = label('সার্চ: <strong>' + escapeHTML(els.search.value) + '</strong> → <strong>' + escapeHTML(query[1]) + '</strong>। পাওয়া গেছে <strong>' + bnNumber(visible) + '</strong> ম্যাচ।', 'Searching: <strong>' + escapeHTML(els.search.value) + '</strong> → <strong>' + escapeHTML(query[1]) + '</strong>. Found <strong>' + visible + '</strong> match card(s).');
+        } else {
+          els.searchHelp.innerHTML = label('সার্চ: <strong>' + escapeHTML(els.search.value) + '</strong>। পাওয়া গেছে <strong>' + bnNumber(visible) + '</strong> ম্যাচ।', 'Searching: <strong>' + escapeHTML(els.search.value) + '</strong>. Found <strong>' + visible + '</strong> match card(s).');
+        }
+      }
+
+      function renderWatchList() {
+        var watched = loadIdList(WATCHED_KEY);
+        save(WATCHED_KEY, watched);
+        if (!watched.length) {
+          els.watchList.innerHTML = '<p class="panel-copy">' + label("এখনও কোনো ম্যাচ ওয়াচ লিস্টে নেই।", "No watched match yet.") + '</p>';
+          return;
+        }
+        els.watchList.innerHTML = watched.map(function (id) {
+          var match = matches[id - 1];
+          var teamLine = currentLang === "bn" ? match.teamABn + " vs " + match.teamBBn : match.teamA + " vs " + match.teamB;
+          return '<div class="watch-item"><strong>' + label("ম্যাচ " + bnNumber(match.id) + " - " + escapeHTML(match.dateLabelBn), "Match " + match.id + " - " + escapeHTML(match.dateLabel)) + '</strong><span>' + escapeHTML(teamLine) + ' - ' + escapeHTML(matchTime(match)) + '</span><br><span>' + label("ভেন্যু: ", "Venue: ") + escapeHTML(match.venue) + '</span></div>';
+        }).join("");
+      }
+
+      function renderFavoriteList() {
+        var favorites = loadIdList(FAVORITES_KEY);
+        if (!favorites.length) {
+          els.favoriteList.innerHTML = '<p class="panel-copy">' + label("এখনও কোনো ফেভারিট ম্যাচ নেই।", "No favorite match yet.") + '</p>';
+          return;
+        }
+        els.favoriteList.innerHTML = favorites.map(function (id) {
+          var match = matches[id - 1];
+          var teamLine = currentLang === "bn" ? match.teamABn + " vs " + match.teamBBn : match.teamA + " vs " + match.teamB;
+          return '<div class="activity-item"><strong>' + label("ম্যাচ " + bnNumber(match.id), "Match " + match.id) + '</strong><span>' + escapeHTML(teamLine) + ' - ' + escapeHTML(matchTime(match)) + '</span><span>' + label("ভেন্যু: ", "Venue: ") + escapeHTML(match.venue) + '</span></div>';
+        }).join("");
+      }
+
+      function renderNextFour() {
+        var now = Date.now();
+        var upcoming = matches.filter(function (match) { return Date.parse(match.bd) >= now; })
+          .sort(function (a, b) { return Date.parse(a.bd) - Date.parse(b.bd); })
+          .slice(0, 4);
+
+        if (!upcoming.length) {
+          els.nextFourGrid.innerHTML = '<div class="next-four-item"><strong>' + label("টুর্নামেন্ট শেষ", "Tournament completed") + '</strong></div>';
+          return;
+        }
+
+        els.nextFourGrid.innerHTML = upcoming.map(function (match) {
+          var teamsText = currentLang === "bn" ? match.teamABn + " vs " + match.teamBBn : match.teamA + " vs " + match.teamB;
+          var dateText = currentLang === "bn" ? match.dateLabelBn : match.dateLabel;
+          return '<div class="next-four-item"><strong>' + label("ম্যাচ ", "Match ") + bnNumber(match.id) + ': ' + escapeHTML(teamsText) + '</strong><span>' + escapeHTML(dateText + " · " + matchTime(match)) + '</span><span>' + label("ভেন্যু: ", "Venue: ") + escapeHTML(match.venue) + '</span></div>';
+        }).join("");
+      }
+
+      function renderSquads() {
+        els.squadGrid.innerHTML = teams.map(function (team) {
+          var officialName = squadTeamAliases[team[0]] || team[0];
+          var squad = officialSquads[officialName] || { coach: "", players: [] };
+          var players = Array.isArray(squad.players) ? squad.players : [];
+          var teamName = currentLang === "bn" ? team[1] : team[0];
+          var playerRows = players.map(function (player) {
+            return '<li><span class="player-pos">' + escapeHTML(player.position) + '</span><span><span class="player-name">' + escapeHTML(player.name) + '</span><span class="player-club">' + escapeHTML(player.club) + '</span></span></li>';
+          }).join("");
+          return '<details class="squad-card"><summary><strong>' + escapeHTML(teamName) + '</strong><span class="squad-meta">' + escapeHTML(currentLang === "bn" ? team[0] : team[1]) + ' · ' + bnNumber(players.length) + ' ' + label("জন খেলোয়াড়", "players") + '</span></summary><div class="squad-body"><p class="squad-coach">' + label("কোচ: ", "Coach: ") + escapeHTML(squad.coach || label("তথ্য পাওয়া যায়নি", "Not available")) + '</p><ul class="player-list">' + playerRows + '</ul><a class="official-source" href="FIFA_World_Cup_2026_Official_Squads.pdf" target="_blank" rel="noopener noreferrer">' + label("FIFA অফিসিয়াল PDF দেখুন ↗", "View FIFA official PDF ↗") + '</a></div></details>';
+        }).join("");
+      }
+
+      function renderSupportHistory() {
+        var support = loadSupport();
+        var ids = Object.keys(support).map(Number).filter(function (id) { return matches[id - 1]; }).sort(function (a, b) { return b - a; });
+        if (!ids.length) {
+          els.supportHistoryList.innerHTML = '<p class="panel-copy">' + label("এখনও কোনো সাপোর্ট হিস্ট্রি নেই।", "No support history yet.") + '</p>';
+          return;
+        }
+        els.supportHistoryList.innerHTML = ids.map(function (id) {
+          var match = matches[id - 1];
+          var supported = support[id];
+          var teamLine = currentLang === "bn" ? match.teamABn + " vs " + match.teamBBn : match.teamA + " vs " + match.teamB;
+          return '<div class="activity-item"><strong>' + label("ম্যাচ " + bnNumber(id) + ": সাপোর্ট করেছেন " + escapeHTML(supported), "Match " + id + ": Supported " + escapeHTML(supported)) + '</strong><span>' + escapeHTML(teamLine) + '</span><span>' + label("ভেন্যু: ", "Venue: ") + escapeHTML(match.venue) + '</span></div>';
+        }).join("");
+      }
+
+      function renderSearchHistory() {
+        var list = load(SEARCH_HISTORY_KEY, []);
+        if (!Array.isArray(list)) list = [];
+        list = list.filter(function (item) { return item && item.query; }).slice(0, 8);
+        if (!list.length) {
+          els.searchHistory.innerHTML = "";
+          return;
+        }
+        els.searchHistory.innerHTML = list.map(function (item) {
+          return '<button class="history-chip" type="button" data-search-history="' + escapeHTML(item.query) + '">' + escapeHTML(item.query) + ' (' + Number(item.count || 0) + ')</button>';
+        }).join("");
+      }
+
+      function renderHistory() {
+        var list = load(HISTORY_KEY, []);
+        if (!Array.isArray(list)) list = [];
+        list = list.filter(function (item) { return item && item.text; }).slice(0, 18);
+        if (!list.length) {
+          els.activityList.innerHTML = '<p class="panel-copy">' + label("এখনও কোনো হিস্ট্রি নেই। সার্চ, অ্যানালাইসিস, সাপোর্ট, ফেভারিট বা ওয়াচ অ্যাকশন করলে এখানে দেখাবে।", "No history yet. Search, open analysis, support a team, favorite, or mark a match watched.") + '</p>';
+          return;
+        }
+        els.activityList.innerHTML = list.map(function (item) {
+          var when = item.time ? new Date(item.time).toLocaleString(currentLang === "bn" ? "bn-BD" : "en-US", { hour: "2-digit", minute: "2-digit", day: "2-digit", month: "short" }) : "";
+          var teams = item.teams ? '<span>' + escapeHTML(item.teams) + '</span>' : "";
+          var typeMap = {
+            Search: "সার্চ", View: "ভিউ", Analysis: "অ্যানালাইসিস", Favorite: "ফেভারিট",
+            "Watch List": "ওয়াচ লিস্ট", Support: "সাপোর্ট", "View Mode": "ভিউ মোড",
+            Navigation: "নেভিগেশন", Theme: "থিম", Login: "লগইন", Logout: "লগ আউট"
+          };
+          var typeLabel = currentLang === "bn" ? (typeMap[item.type] || "অ্যাক্টিভিটি") : (item.type || "Activity");
+          return '<div class="activity-item"><strong>' + escapeHTML(typeLabel) + ': ' + escapeHTML(item.text) + '</strong>' + teams + '<span>' + escapeHTML(when) + '</span></div>';
+        }).join("");
+      }
+
+      function toast(message) {
+        els.toast.textContent = message;
+        els.toast.classList.add("show");
+        window.clearTimeout(toast.timer);
+        toast.timer = window.setTimeout(function () { els.toast.classList.remove("show"); }, 1700);
+      }
+
+      function toggleListValue(key, id) {
+        var list = loadIdList(key);
+        var index = list.indexOf(id);
+        if (index === -1) list.push(id);
+        else list.splice(index, 1);
+        save(key, list);
+        return index === -1;
+      }
+
+      function refreshAfterStorageChange() {
+        renderAll();
+      }
+
+      function renderAll() {
+        if (!activeUser) return;
+        els.userPill.textContent = label("ইউজার: ", "User: ") + activeUser;
+        renderMatches();
+        renderNextFour();
+        renderFavoriteList();
+        renderWatchList();
+        renderSupportHistory();
+        renderSquads();
+        renderHistory();
+        renderSearchHistory();
+        updateCountdowns();
+        applyFilters();
+      }
+
+      function login(username, password) {
+        var users = loadUsers();
+        var cleanName = String(username || "").trim();
+        if (!cleanName || !password || !users[cleanName] || users[cleanName].password !== String(password)) {
+          els.loginError.textContent = label("ইউজারনেম বা পাসওয়ার্ড ভুল।", "Wrong username or password.");
+          return false;
+        }
+        activeUser = cleanName;
+        localStorage.setItem(SESSION_KEY, cleanName);
+        document.body.classList.add("logged-in");
+        els.loginError.textContent = "";
+        addHistory("Login", "Logged in", null);
+        renderAll();
+        return true;
+      }
+
+      function createUser(username, password) {
+        var users = loadUsers();
+        var cleanName = String(username || "").trim();
+        if (!cleanName || String(password || "").length < 4) {
+          els.loginError.textContent = label("ইউজারনেম দিন এবং অন্তত ৪ অক্ষরের পাসওয়ার্ড ব্যবহার করুন।", "Enter a username and use a password with at least 4 characters.");
+          return;
+        }
+        if (users[cleanName]) {
+          els.loginError.textContent = label("এই ইউজার আগে থেকেই আছে।", "This user already exists.");
+          return;
+        }
+        users[cleanName] = {
+          password: String(password),
+          email: String(els.recoveryEmail.value || "").trim(),
+          phone: String(els.recoveryPhone.value || "").trim(),
+          createdAt: new Date().toISOString()
+        };
+        saveUsers(users);
+        login(cleanName, password);
+      }
+
+      function recoverUser() {
+        var email = String(els.recoveryEmail.value || "").trim().toLowerCase();
+        var phone = String(els.recoveryPhone.value || "").trim();
+        var users = loadUsers();
+        var found = Object.keys(users).find(function (name) {
+          var user = users[name] || {};
+          return (email && String(user.email || "").toLowerCase() === email) || (phone && String(user.phone || "") === phone);
+        });
+
+        if (!email && !phone) {
+          els.recoveryResult.textContent = label("রিকভারির জন্য ইমেইল বা ফোন নম্বর দিন।", "Enter email or phone number for recovery.");
+          return;
+        }
+
+        if (!found) {
+          els.recoveryResult.textContent = label("এই ইমেইল বা ফোন দিয়ে কোনো লোকাল ইউজার পাওয়া যায়নি।", "No local user found with this email or phone.");
+          return;
+        }
+
+        els.loginUsername.value = found;
+        els.loginPassword.value = users[found].password || "";
+        els.recoveryResult.textContent = label("রিকভারি সম্পন্ন। ইউজার আইডি: ", "Recovery complete. User ID: ") + found + label(" | পাসওয়ার্ড: ", " | Password: ") + (users[found].password || "");
+      }
+
+      function logout() {
+        addHistory("Logout", "Logged out", null);
+        activeUser = "";
+        localStorage.removeItem(SESSION_KEY);
+        document.body.classList.remove("logged-in");
+      }
+
+      els.matchList.addEventListener("click", function (event) {
+        var row = event.target.closest(".match-row");
+        if (!row) return;
+        var match = matches[Number(row.dataset.id) - 1];
+        var actionBtn = event.target.closest("[data-action]");
+
+        if (!actionBtn) {
+          row.classList.toggle("open");
+          return;
+        }
+
+        event.stopPropagation();
+        var action = actionBtn.dataset.action;
+        if (action === "favorite") {
+          var favAdded = toggleListValue(FAVORITES_KEY, match.id);
+          toast(favAdded ? "Added to favorites" : "Removed from favorites");
+          addHistory("Favorite", (favAdded ? "Added " : "Removed ") + "Match " + match.id, match);
+        }
+        if (action === "watched") {
+          var watchedAdded = toggleListValue(WATCHED_KEY, match.id);
+          toast(watchedAdded ? "Added to My Watch List" : "Removed from My Watch List");
+          addHistory("Watch List", (watchedAdded ? "Watched " : "Removed ") + "Match " + match.id, match);
+        }
+        if (action === "support-a" || action === "support-b") {
+          var support = loadSupport();
+          var supportedTeam = action === "support-a" ? match.teamA : match.teamB;
+          support[match.id] = supportedTeam;
+          save(SUPPORT_KEY, support);
+          toast("Support saved");
+          addHistory("Support", "Supported " + supportedTeam, match);
+        }
+        refreshAfterStorageChange();
+        var updated = document.getElementById("match-" + match.id);
+        if (updated) updated.classList.add("open");
+      });
+
+      els.loginForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        login(els.loginUsername.value, els.loginPassword.value);
+      });
+
+      document.querySelector(".top-nav").addEventListener("click", function (event) {
+        var btn = event.target.closest("[data-jump-target]");
+        if (!btn) return;
+        var target = document.getElementById(btn.dataset.jumpTarget);
+        if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+
+      els.createUser.addEventListener("click", function () {
+        createUser(els.loginUsername.value, els.loginPassword.value);
+      });
+
+      els.forgot.addEventListener("click", function () {
+        els.recoveryPanel.classList.toggle("show");
+        els.recoveryResult.textContent = "";
+      });
+
+      els.recover.addEventListener("click", recoverUser);
+
+      function toggleLanguage() {
+        currentLang = currentLang === "bn" ? "en" : "bn";
+        applyLanguage();
+      }
+
+      els.language.addEventListener("click", toggleLanguage);
+      els.loginLang.addEventListener("click", toggleLanguage);
+      els.logout.addEventListener("click", logout);
+
+      els.filters.addEventListener("click", function (event) {
+        var btn = event.target.closest("[data-filter]");
+        if (!btn) return;
+        currentFilter = btn.dataset.filter;
+        els.filters.querySelectorAll("[data-filter]").forEach(function (item) { item.classList.remove("active"); });
+        btn.classList.add("active");
+        applyFilters();
+      });
+
+      document.querySelectorAll("[data-view]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          currentView = btn.dataset.view;
+          document.querySelectorAll("[data-view]").forEach(function (item) { item.classList.remove("active"); });
+          btn.classList.add("active");
+          document.body.classList.toggle("mobile-preview", currentView === "mobile");
+          toast(currentView === "mobile" ? "Mobile preview selected" : "Browser preview selected");
+          addHistory("View Mode", currentView === "mobile" ? "Selected Mobile preview" : "Selected Browser preview", null);
+        });
+      });
+
+      els.search.addEventListener("input", function () {
+        applyFilters();
+        window.clearTimeout(searchLogTimer);
+        searchLogTimer = window.setTimeout(function () {
+          var q = els.search.value.trim();
+          if (!q) return;
+          addSearchHistory(q, document.querySelectorAll(".match-row:not(.hidden)").length);
+        }, 650);
+      });
+      els.search.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          addSearchHistory(els.search.value, document.querySelectorAll(".match-row:not(.hidden)").length);
+          var first = document.querySelector(".match-row:not(.hidden)");
+          if (first) first.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      });
+
+      els.searchHistory.addEventListener("click", function (event) {
+        var btn = event.target.closest("[data-search-history]");
+        if (!btn) return;
+        els.search.value = btn.dataset.searchHistory;
+        applyFilters();
+        addHistory("Search", 'Reused "' + btn.dataset.searchHistory + '"', null);
+      });
+
+      function resetList() {
+        els.search.value = "";
+        currentFilter = "all";
+        els.filters.querySelectorAll("[data-filter]").forEach(function (item) {
+          item.classList.toggle("active", item.dataset.filter === "all");
+        });
+        applyFilters();
+      }
+
+      els.clearSearch.addEventListener("click", resetList);
+      els.resetSearch.addEventListener("click", resetList);
+
+      els.jumpNext.addEventListener("click", function () {
+        var next = matches.filter(function (match) { return Date.parse(match.bd) > Date.now(); })
+          .sort(function (a, b) { return Date.parse(a.bd) - Date.parse(b.bd); })[0];
+        var row = next ? document.getElementById("match-" + next.id) : null;
+        if (row) row.scrollIntoView({ behavior: "smooth", block: "center" });
+        if (next) addHistory("Navigation", "Jumped to next match", next);
+      });
+
+      els.darkMode.addEventListener("click", function () {
+        document.body.classList.toggle("dark");
+        save(DARK_KEY, document.body.classList.contains("dark"));
+        addHistory("Theme", document.body.classList.contains("dark") ? "Dark mode enabled" : "Light mode enabled", null);
+      });
+
+      els.clearHistory.addEventListener("click", function () {
+        save(HISTORY_KEY, []);
+        save(SEARCH_HISTORY_KEY, []);
+        renderHistory();
+        renderSearchHistory();
+        toast("History cleared");
+      });
+
+      window.addEventListener("scroll", function () { els.backTop.classList.toggle("show", window.scrollY > 650); });
+      els.backTop.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); });
+
+      applyLanguage();
+      var savedSession = localStorage.getItem(SESSION_KEY);
+      if (savedSession && loadUsers()[savedSession]) {
+        activeUser = savedSession;
+        document.body.classList.add("logged-in");
+      }
+      if (load(DARK_KEY, false)) document.body.classList.add("dark");
+
+      renderAll();
+      updateClock();
+      updateCountdowns();
+      applyFilters();
+      refreshLiveFeed();
+      window.setInterval(function () {
+        updateClock();
+        updateCountdowns();
+      }, 1000);
+      window.setInterval(renderNextFour, 60000);
+      if (liveScoreEndpoint) window.setInterval(refreshLiveFeed, liveRefreshMs);
+    })();
+  </script>
+</body>
+</html>
